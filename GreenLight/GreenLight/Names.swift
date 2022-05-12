@@ -7,15 +7,17 @@
 
 import Foundation
 import SwiftUI
+import OrderedCollections
 
 struct Name{
-    let name: String
-    let id: String
+    var name: String
+    var id: String
 }
 
-struct nameList{
-    static let blackList =
+let blackList =
     [Name(name: "Tucker Simpson", id: "F004H39")]
-    static let socialList =
+let socialList =
     [Name(name:"Jackson Desmond" , id: "F004HBW")]
-}
+let blackDict = OrderedDictionary(uniqueKeys: ["F004H39"], values: ["Tucker Simpson"])
+let socialDict = OrderedDictionary(uniqueKeys: ["F004HBW"], values: ["Jackson Desmond"])
+

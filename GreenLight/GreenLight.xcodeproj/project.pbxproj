@@ -23,6 +23,7 @@
 		7B39AB40282C7A40005FCA5C /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB3F282C7A40005FCA5C /* PreviewView.swift */; };
 		7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB41282C7A68005FCA5C /* VisionViewController.swift */; };
 		7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB43282C7A95005FCA5C /* CameraViewController.swift */; };
+		7B77E2AF282CBB51009A6955 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7B77E2AE282CBB51009A6955 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B77E2AF282CBB51009A6955 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +172,9 @@
 			dependencies = (
 			);
 			name = GreenLight;
+			packageProductDependencies = (
+				7B77E2AE282CBB51009A6955 /* OrderedCollections */,
+			);
 			productName = GreenLight;
 			productReference = 7B39AB06282C77B2005FCA5C /* GreenLight.app */;
 			productType = "com.apple.product-type.application";
@@ -242,6 +247,9 @@
 				Base,
 			);
 			mainGroup = 7B39AAFD282C77B2005FCA5C;
+			packageReferences = (
+				7B77E2AD282CBB51009A6955 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 7B39AB07282C77B2005FCA5C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -625,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B77E2AD282CBB51009A6955 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B77E2AE282CBB51009A6955 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B77E2AD282CBB51009A6955 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B39AAFE282C77B2005FCA5C /* Project object */;
 }

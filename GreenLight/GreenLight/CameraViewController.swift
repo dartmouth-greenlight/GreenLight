@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Vision
+import OrderedCollections
 
 class CameraViewController: UIViewController {
     // MARK: - UI objects
@@ -51,6 +52,9 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Creat and add tap gesture listener
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
         
         // Set up preview view.
         previewView = PreviewView()
@@ -87,6 +91,9 @@ class CameraViewController: UIViewController {
         idView.translatesAutoresizingMaskIntoConstraints = false
         idView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         idView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        idView.textAlignment = .center
+        idView.layer.cornerRadius = 50
+        idView.layer.masksToBounds = true
         
         // Starting the capture session is a blocking call. Perform setup using
         // a dedicated serial dispatch queue to prevent blocking the main thread.
@@ -175,7 +182,7 @@ class CameraViewController: UIViewController {
         //TODO: Change Properties of idFrame to change idView
         var idFrame = cutout
         idFrame.origin.y += idFrame.size.height
-        idView.frame = CGRect (x: cutout.midX-150, y: cutout.origin.y + cutout.size.height, width: 300, height: 100);
+        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
     }
     
     func setupOrientationAndTransform() {
@@ -274,13 +281,30 @@ class CameraViewController: UIViewController {
         captureSessionQueue.sync {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
+                // Green case:
+                if(socialDict.keys.contains(string)){
+                    self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
+                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.5))
+                }
+                // Red case:
+                else if(blackDict.keys.contains(string)){
+                    self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.5))
+                }
+                // Yellow case:
+                else{
+                    self.cutoutView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
+                    self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.5))
+                }
+                                
+                                
                 self.idView.text = string
                 self.idView.isHidden = false
             }
         }
     }
     
-    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         captureSessionQueue.async {
             if !self.captureSession.isRunning {
                 self.captureSession.startRunning()

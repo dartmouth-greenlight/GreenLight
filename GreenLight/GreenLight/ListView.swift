@@ -43,6 +43,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(title: "Black List", names: nameList.blackList)
+        ListView(title: "Black List", names: blackList)
     }
 }

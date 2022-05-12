@@ -13,14 +13,15 @@ struct HubView: View {
                 Color(.white)
                     .edgesIgnoringSafeArea(.all)
                 VStack{
-                    Text("Lists")
-                        .font(.custom("Futura-Bold", size: 50))
+                    Spacer()
+                    Text("Your Lists")
+                        .font(.custom("Futura-Bold", size: 30))
                         .foregroundColor(.green)
                         .padding(.bottom,20)
                     VStack{
                         NavigationLink(
                             
-                            destination: ListView(title: "Social List", names: nameList.socialList),
+                            destination: ListView(title: "Social List", names: socialList),
                             label: {
                                 Text("Social List")
                                     .frame(width: 240, height: 50)
@@ -32,7 +33,7 @@ struct HubView: View {
                             })
                         NavigationLink(
                             
-                            destination: ListView(title: "Black List", names: nameList.blackList),
+                            destination: ListView(title: "Black List", names: blackList),
                             label: {
                                 Text("Black List")
                                     .frame(width: 240, height: 50)
@@ -42,6 +43,7 @@ struct HubView: View {
                                     .cornerRadius(30)
                     })
                 }
+            Spacer()
             Spacer()
             }
         }
