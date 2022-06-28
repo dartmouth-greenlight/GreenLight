@@ -272,7 +272,7 @@ class CameraViewController: UIViewController {
         captureSession.startRunning()
     }
     
-    // MARK: - UI drawing and interaction
+    // MARK: - UI drawing and interaction --> where we check green vs. yellow vs. red
     
     func showString(string: String) {
         // Found a definite ID.

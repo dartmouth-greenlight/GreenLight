@@ -2,10 +2,12 @@
 //  lookupAPIs.swift
 //  GreenLight
 //
-//  Created by Jack Desmond on 6/27/22.
+//  Created by Jack Desmond and Tucker Simpson on 6/27/22.
 //
 
 import Foundation
+
+//TODO: Make more robust for typos, nicknames, common names, etc.
 
 // sections of the json object the api returns
 struct IDLookUp: Codable {
@@ -23,9 +25,14 @@ func getName(id: String) -> String {
     let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(studentID)"
     let resourceURL = URL(string: resourceString)
     guard resourceURL != nil else {return "Name not found"}
+    
+    let semaphore = DispatchSemaphore(value: 0)  //1. create a counting semaphore
+    
+    // Create URL session
     let session = URLSession.shared
     var user = ""
 
+    // Add more checks for errors, correct response, etc.
     let dataTask = session.dataTask(with: resourceURL!) { (data, response, error) in
         //Check for errors
         if error == nil && data != nil {
@@ -35,7 +42,13 @@ func getName(id: String) -> String {
             do {
                 let idlookup = try decoder.decode(IDLookUp.self, from: data!)
                 let users = idlookup.users
-                user = users[0].displayName
+                if(users.isEmpty){
+                    user = "No name found."
+                    semaphore.signal() // 2. Count it up if no name found
+                }else{
+                    user = users[0].displayName
+                    semaphore.signal()  //2. Count it up
+                }
 
             }
             catch {
@@ -44,14 +57,13 @@ func getName(id: String) -> String {
         }
     }
     dataTask.resume()
-    if(user != ""){
-        return user
-    } else{
-        return "Name not found"
-    }
+    
+    semaphore.wait()    // 3. Wait for semaphore
+    
+    return user
 }
 
-func getID(name: String) {
+func getID(name: String) -> String{
     //Building URL
     var name = name.split(separator: " ")
     let first = name[0]
@@ -59,9 +71,15 @@ func getID(name: String) {
     let fullName = first + "_" + last
     let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(fullName)"
     let resourceURL = URL(string: resourceString)
-    guard resourceURL != nil else {return}
+    guard resourceURL != nil else {return "ID not found."}
+    
+    let semaphore = DispatchSemaphore(value: 0)  //1. create a counting semaphore
+    
+    // Create URL session
     let session = URLSession.shared
+    var user = ""
 
+    // Add more checks for errors, correct response, etc.
     let dataTask = session.dataTask(with: resourceURL!) { (data, response, error) in
         //Check for errors
         if error == nil && data != nil {
@@ -71,9 +89,15 @@ func getID(name: String) {
             do {
                 let idlookup = try decoder.decode(IDLookUp.self, from: data!)
                 let users = idlookup.users
-                let user = users[0].uid
-                print(user)
-                
+                if(users.isEmpty){
+                    user = "No name found."
+                    semaphore.signal() // 2. Count it up if no name found
+                }else{
+                    // Need better handle of case where have common name
+                    user = users[0].uid
+                    semaphore.signal()  //2. count it up
+                }
+
             }
             catch {
                 print(error)
@@ -81,4 +105,8 @@ func getID(name: String) {
         }
     }
     dataTask.resume()
+    
+    semaphore.wait()    // 3. Wait for semaphore
+    
+    return user
 }
