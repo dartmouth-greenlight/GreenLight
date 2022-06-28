@@ -157,7 +157,7 @@ class StringTracker {
         }
         
         print("Seen best string: \(bestString) \(bestCount) times")
-        print("Seen second best string: \(secondBestString)\(secondBestCount) times")
+        print("Seen second best string: \(secondBestString) \(secondBestCount) times")
 
         // Remove old strings.
         for string in obsoleteStrings {
@@ -170,6 +170,7 @@ class StringTracker {
     func getStableString() -> String? {
         // Require the recognizer to see the same string at least 10 times.
         //TODO: determine score confidence of string recognized
+        // here is where we could do cross-validation
         if bestCount >= 10 {
             return bestString
         } else {

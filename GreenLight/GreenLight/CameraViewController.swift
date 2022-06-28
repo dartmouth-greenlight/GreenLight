@@ -285,20 +285,22 @@ class CameraViewController: UIViewController {
                 if(socialDict.keys.contains(string)){
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.5))
+                    self.idView.text = socialDict[string]
                 }
                 // Red case:
                 else if(blackDict.keys.contains(string)){
                     self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.5))
+                    self.idView.text = blackDict[string]
                 }
                 // Yellow case:
                 else{
                     self.cutoutView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.5))
+                    self.idView.text = getName(id: string)
                 }
-                                
-                                
-                self.idView.text = string
+                
+               // self.idView.text = string
                 self.idView.isHidden = false
             }
         }
