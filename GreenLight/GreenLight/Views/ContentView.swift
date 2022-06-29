@@ -29,7 +29,17 @@ struct ContentView: View {
                                     .font(.custom("Futura-Bold", size: 20))
                                     .foregroundColor(Color.white)
                                     .cornerRadius(30)
-                                    .padding(15)
+                            })
+                        NavigationLink(
+                            
+                            destination: ManualCheckView(),
+                            label: {
+                                Text("Manual Check")
+                                    .frame(width: 240, height: 50)
+                                    .background(Color.green)
+                                    .font(.custom("Futura-Bold", size: 20))
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(30)
                             })
                         NavigationLink(
                             
