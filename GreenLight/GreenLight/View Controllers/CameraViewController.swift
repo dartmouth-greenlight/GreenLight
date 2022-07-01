@@ -3,6 +3,7 @@
 //  GreenLight
 //
 //  Created by Jack Desmond on 5/11/22.
+//  Authored by Tucker Simpson and Jack Desmond
 //
 
 import UIKit
