@@ -2,7 +2,8 @@
 //  lookupAPIs.swift
 //  GreenLight
 //
-//  Created by Jack Desmond and Tucker Simpson on 6/27/22.
+//  Created by Jack Desmond on 6/27/22.
+//  Authored by Tucker Simpson and Jack Desmond
 //
 
 import Foundation
