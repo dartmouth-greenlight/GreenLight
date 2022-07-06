@@ -20,46 +20,54 @@ struct User: Codable {
     let uid, eduPersonPrimaryAffiliation, mail, displayName: String
 }
 
+enum MyError: Error {
+    case runtimeError(String)
+}
+
 func getName(id: String) -> String {
     //Building URL
     let studentID = id
-    let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(studentID)"
-    let resourceURL = URL(string: resourceString)
-    guard resourceURL != nil else {return "Name not found"}
-    
-    let semaphore = DispatchSemaphore(value: 0)  //1. create a counting semaphore
-    
-    // Create URL session
-    let session = URLSession.shared
     var user = ""
+    if(studentID.prefix(3)=="f00" || studentID.prefix(3)=="F00"){
+        let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(studentID)"
+        let resourceURL = URL(string: resourceString)
+        guard resourceURL != nil else {return "Name not found."}
+        
+        let semaphore = DispatchSemaphore(value: 0)  //1. create a counting semaphore
+        
+        // Create URL session
+        let session = URLSession.shared
 
-    // Add more checks for errors, correct response, etc.
-    let dataTask = session.dataTask(with: resourceURL!) { (data, response, error) in
-        //Check for errors
-        if error == nil && data != nil {
-            //Parse JSON
-            let decoder = JSONDecoder()
+        // Add more checks for errors, correct response, etc.
+        let dataTask = session.dataTask(with: resourceURL!) { (data, response, error) in
+            //Check for errors
+            if error == nil && data != nil {
+                //Parse JSON
+                let decoder = JSONDecoder()
 
-            do {
-                let idlookup = try decoder.decode(IDLookUp.self, from: data!)
-                let users = idlookup.users
-                if(users.isEmpty){
-                    user = "No name found."
-                    semaphore.signal() // 2. Count it up if no name found
-                }else{
-                    user = users[0].displayName
-                    semaphore.signal()  //2. Count it up
+                do {
+                    let idlookup = try decoder.decode(IDLookUp.self, from: data!)
+                    let users = idlookup.users
+                    if(users.isEmpty){
+                        user = "No name found."
+                        semaphore.signal() // 2. Count it up if no name found
+                    }else{
+                        user = users[0].displayName
+                        semaphore.signal()  //2. Count it up
+                    }
+
                 }
-
-            }
-            catch {
-                print(error)
+                catch {
+                    print(error)
+                }
             }
         }
+        dataTask.resume()
+        
+        semaphore.wait()    // 3. Wait for semaphore
+    }else{
+        user = "Name not found."
     }
-    dataTask.resume()
-    
-    semaphore.wait()    // 3. Wait for semaphore
     
     return user
 }

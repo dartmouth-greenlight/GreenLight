@@ -100,6 +100,7 @@ class CameraViewController: UIViewController {
         // a dedicated serial dispatch queue to prevent blocking the main thread.
         captureSessionQueue.async {
             self.setupCamera()
+            self.toggleFlash()
             
             // Calculate region of interest now that the camera is setup.
             DispatchQueue.main.async {
@@ -133,6 +134,29 @@ class CameraViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateCutout()
+    }
+    
+    func toggleFlash() {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
+        guard device.hasTorch else { return }
+
+        do {
+            try device.lockForConfiguration()
+
+            if (device.torchMode == AVCaptureDevice.TorchMode.on) {
+                device.torchMode = AVCaptureDevice.TorchMode.off
+            } else {
+                do {
+                    try device.setTorchModeOn(level: 1.0)
+                } catch {
+                    print(error)
+                }
+            }
+
+            device.unlockForConfiguration()
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - Setup
@@ -283,13 +307,14 @@ class CameraViewController: UIViewController {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
                 // Green case:
-                if(socialDict.keys.contains(string)){
+                if(socialDict[string] != nil){
+                    print("here")
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.5))
                     self.idView.text = socialDict[string]
                 }
                 // Red case:
-                else if(blackDict.keys.contains(string)){
+                else if(blackDict[string] != nil){
                     self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.5))
                     self.idView.text = blackDict[string]
@@ -319,6 +344,8 @@ class CameraViewController: UIViewController {
         }
     }
 }
+
+
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
