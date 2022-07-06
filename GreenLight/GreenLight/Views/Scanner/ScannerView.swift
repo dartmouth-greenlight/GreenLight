@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFoundation
+
 
 struct ScannerView: View {
     var body: some View {

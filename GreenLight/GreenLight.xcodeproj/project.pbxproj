@@ -24,7 +24,6 @@
 		7B39AB40282C7A40005FCA5C /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB3F282C7A40005FCA5C /* PreviewView.swift */; };
 		7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB41282C7A68005FCA5C /* VisionViewController.swift */; };
 		7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB43282C7A95005FCA5C /* CameraViewController.swift */; };
-		7B77E2AF282CBB51009A6955 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7B77E2AE282CBB51009A6955 /* OrderedCollections */; };
 		7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B77E2AF282CBB51009A6955 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +217,6 @@
 			);
 			name = GreenLight;
 			packageProductDependencies = (
-				7B77E2AE282CBB51009A6955 /* OrderedCollections */,
 			);
 			productName = GreenLight;
 			productReference = 7B39AB06282C77B2005FCA5C /* GreenLight.app */;
@@ -692,14 +689,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		7B77E2AE282CBB51009A6955 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7B77E2AD282CBB51009A6955 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B39AAFE282C77B2005FCA5C /* Project object */;
 }
