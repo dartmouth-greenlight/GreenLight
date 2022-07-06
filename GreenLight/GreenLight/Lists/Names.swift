@@ -262,9 +262,9 @@ let blackDict = ["F004HF0" : "Nicolas Leey Parodi",
                 ]
 
 let demoDict = ["F004HBW" : "Jackson Desmond",
-                  "F004H1H" : "Katherine L. Levy",
-                  "F004GZY" : "Daniel J. Locascio",
-                  "F004Y2W" : "Caroline B. Kramer",
-                  "F004Q8X" : "Isabelle B. Lewitt"
+                "F004H1H" : "Katherine L. Levy",
+                "F004GZY" : "Daniel J. Locascio",
+                "F004Y2W" : "Caroline B. Kramer",
+                "F004Q8X" : "Isabelle B. Lewitt"
                 ]
 
