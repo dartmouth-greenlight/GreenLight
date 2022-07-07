@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		48C0AC62286A839800A5D068 /* LookupAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0AC61286A839800A5D068 /* LookupAPIs.swift */; };
+		48C6945628762D4F000DB8FE /* ManualCheckOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6945528762D4F000DB8FE /* ManualCheckOverlayView.swift */; };
+		48C694582876354A000DB8FE /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C694572876354A000DB8FE /* PreviewView.swift */; };
 		7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */; };
 		7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB0B282C77B2005FCA5C /* ContentView.swift */; };
 		7B39AB0E282C77B7005FCA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B39AB0D282C77B7005FCA5C /* Assets.xcassets */; };
@@ -21,7 +23,6 @@
 		7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB39282C7955005FCA5C /* ScannerView.swift */; };
 		7B39AB3C282C798D005FCA5C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB3B282C798D005FCA5C /* CameraView.swift */; };
 		7B39AB3E282C7A04005FCA5C /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB3D282C7A04005FCA5C /* StringUtils.swift */; };
-		7B39AB40282C7A40005FCA5C /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB3F282C7A40005FCA5C /* PreviewView.swift */; };
 		7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB41282C7A68005FCA5C /* VisionViewController.swift */; };
 		7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB43282C7A95005FCA5C /* CameraViewController.swift */; };
 		7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		48C0AC61286A839800A5D068 /* LookupAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupAPIs.swift; sourceTree = "<group>"; };
+		48C6945528762D4F000DB8FE /* ManualCheckOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckOverlayView.swift; sourceTree = "<group>"; };
+		48C694572876354A000DB8FE /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		7B39AB06282C77B2005FCA5C /* GreenLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightApp.swift; sourceTree = "<group>"; };
 		7B39AB0B282C77B2005FCA5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,7 +65,6 @@
 		7B39AB39282C7955005FCA5C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		7B39AB3B282C798D005FCA5C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		7B39AB3D282C7A04005FCA5C /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
-		7B39AB3F282C7A40005FCA5C /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		7B39AB41282C7A68005FCA5C /* VisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionViewController.swift; sourceTree = "<group>"; };
 		7B39AB43282C7A95005FCA5C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckView.swift; sourceTree = "<group>"; };
@@ -107,10 +109,10 @@
 		48C0AC64286A90E300A5D068 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				7B39AB3F282C7A40005FCA5C /* PreviewView.swift */,
 				7B39AB39282C7955005FCA5C /* ScannerView.swift */,
 				7B39AB3D282C7A04005FCA5C /* StringUtils.swift */,
 				7B39AB3B282C798D005FCA5C /* CameraView.swift */,
+				48C694572876354A000DB8FE /* PreviewView.swift */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 				7B39AB0D282C77B7005FCA5C /* Assets.xcassets */,
 				7B39AB0F282C77B7005FCA5C /* Preview Content */,
 				48C0AC61286A839800A5D068 /* LookupAPIs.swift */,
+				48C6945528762D4F000DB8FE /* ManualCheckOverlayView.swift */,
 			);
 			path = GreenLight;
 			sourceTree = "<group>";
@@ -340,13 +343,14 @@
 				7B39AB38282C7927005FCA5C /* Names.swift in Sources */,
 				48C0AC62286A839800A5D068 /* LookupAPIs.swift in Sources */,
 				7B39AB3C282C798D005FCA5C /* CameraView.swift in Sources */,
-				7B39AB40282C7A40005FCA5C /* PreviewView.swift in Sources */,
 				7B39AB36282C7840005FCA5C /* ListView.swift in Sources */,
 				7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */,
 				7B39AB3E282C7A04005FCA5C /* StringUtils.swift in Sources */,
 				7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */,
+				48C694582876354A000DB8FE /* PreviewView.swift in Sources */,
 				7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */,
 				7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */,
+				48C6945628762D4F000DB8FE /* ManualCheckOverlayView.swift in Sources */,
 				7B39AB34282C781F005FCA5C /* HubView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,9 +10,17 @@ import AVFoundation
 
 
 struct ScannerView: View {
+    @State private var keyboardHeight: CGFloat = 0
     var body: some View {
-        CameraView()
-            .ignoresSafeArea()
+        ZStack{
+            CameraView()
+                .ignoresSafeArea()
+            ManualCheckOverlayView()
+                .offset(y:400-keyboardHeight)
+                .padding(.bottom, 15 + keyboardHeight)
+        }
+        .padding(.bottom, keyboardHeight)
+        //.onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
     }
 }
 

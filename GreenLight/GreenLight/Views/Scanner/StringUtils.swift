@@ -131,7 +131,7 @@ class StringTracker {
             }
             seenStrings[string]?.lastSeen = frameIndex
             seenStrings[string]?.count += 1
-            print("Seen \(string) \(seenStrings[string]?.count ?? 0) times")
+            //print("Seen \(string) \(seenStrings[string]?.count ?? 0) times")
         }
     
         var obsoleteStrings = [String]()

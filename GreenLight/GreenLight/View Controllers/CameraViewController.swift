@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 import Vision
-import OrderedCollections
 
 class CameraViewController: UIViewController {
     // MARK: - UI objects
@@ -95,6 +94,8 @@ class CameraViewController: UIViewController {
         idView.textAlignment = .center
         idView.layer.cornerRadius = 50
         idView.layer.masksToBounds = true
+        idView.textColor = UIColor.black
+        idView.sizeToFit()
         
         // Starting the capture session is a blocking call. Perform setup using
         // a dedicated serial dispatch queue to prevent blocking the main thread.
@@ -178,7 +179,7 @@ class CameraViewController: UIViewController {
             size = CGSize(width: desiredWidthRatio, height: desiredHeightRatio)
         }
         // Make it centered.
-        regionOfInterest.origin = CGPoint(x: (1 - size.width) / 2, y: (1 - size.height) / 2)
+        regionOfInterest.origin = CGPoint(x: (1 - size.width) / 2, y: 2 * (1 - size.height) / 3)
         regionOfInterest.size = size
                 
         // ROI changed, update transform.
@@ -206,8 +207,11 @@ class CameraViewController: UIViewController {
         // Move the ID view down to under cutout.
         //TODO: Change Properties of idFrame to change idView
         var idFrame = cutout
-        idFrame.origin.y += idFrame.size.height
-        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
+        idFrame.origin.y = 0
+        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y - cutout.size.height/2, width: 300, height: 100);
+        
+//        idFrame.origin.y += idFrame.size.height
+//        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
     }
     
     func setupOrientationAndTransform() {
@@ -308,21 +312,20 @@ class CameraViewController: UIViewController {
             DispatchQueue.main.async {
                 // Green case:
                 if(socialDict[string] != nil){
-                    print("here")
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.8))
                     self.idView.text = socialDict[string]
                 }
                 // Red case:
                 else if(blackDict[string] != nil){
                     self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.8))
                     self.idView.text = blackDict[string]
                 }
                 // Yellow case:
                 else{
                     self.cutoutView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.8))
                     self.idView.text = getName(id: string)
                 }
                 
@@ -336,6 +339,7 @@ class CameraViewController: UIViewController {
         captureSessionQueue.async {
             if !self.captureSession.isRunning {
                 self.captureSession.startRunning()
+                self.toggleFlash()
             }
             DispatchQueue.main.async {
                 self.idView.isHidden = true
@@ -369,5 +373,6 @@ extension AVCaptureVideoOrientation {
         }
     }
 }
+
 
 

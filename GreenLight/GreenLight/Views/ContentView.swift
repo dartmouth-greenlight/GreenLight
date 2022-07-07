@@ -9,6 +9,28 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
+    func toggleFlash() {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
+        guard device.hasTorch else { return }
+
+        do {
+            try device.lockForConfiguration()
+
+            if (device.torchMode == AVCaptureDevice.TorchMode.on) {
+                device.torchMode = AVCaptureDevice.TorchMode.off
+            } else {
+                do {
+                    try device.setTorchModeOn(level: 1.0)
+                } catch {
+                    print(error)
+                }
+            }
+
+            device.unlockForConfiguration()
+        } catch {
+            print(error)
+        }
+    }
     var body: some View {
         NavigationView{
             ZStack{
@@ -21,7 +43,6 @@ struct ContentView: View {
                         .padding(.bottom,200)
                     VStack{
                         NavigationLink(
-                            
                             destination: ScannerView(),
                             label: {
                                 Text("Scanner")
@@ -31,6 +52,11 @@ struct ContentView: View {
                                     .foregroundColor(Color.white)
                                     .cornerRadius(30)
                             })
+//                            .onAppear(){
+//                                //this is called when the app starts?
+//                                self.toggleFlash()
+//                                print("here")
+//                            }
                         NavigationLink(
                             
                             destination: ManualCheckView(),
