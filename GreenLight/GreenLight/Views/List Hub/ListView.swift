@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ListView: View {
     var title: String
-    var names: [Name]
+    var names: [Person]
     
-    init(title: String, names: [Name]) {
+    init(title: String, names: [Person]) {
         self.title = title
         self.names = names
         UITableView.appearance().backgroundColor = .clear
