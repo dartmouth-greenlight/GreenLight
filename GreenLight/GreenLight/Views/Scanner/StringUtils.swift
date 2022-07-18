@@ -131,7 +131,7 @@ class StringTracker {
             }
             seenStrings[string]?.lastSeen = frameIndex
             seenStrings[string]?.count += 1
-            print("Seen \(string) \(seenStrings[string]?.count ?? 0) times")
+            //print("Seen \(string) \(seenStrings[string]?.count ?? 0) times")
         }
     
         var obsoleteStrings = [String]()
@@ -156,9 +156,6 @@ class StringTracker {
             }
         }
         
-        print("Seen best string: \(bestString) \(bestCount) times")
-        print("Seen second best string: \(secondBestString) \(secondBestCount) times")
-
         // Remove old strings.
         for string in obsoleteStrings {
             seenStrings.removeValue(forKey: string)

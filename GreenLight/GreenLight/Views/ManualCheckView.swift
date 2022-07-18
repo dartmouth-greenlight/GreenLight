@@ -45,12 +45,12 @@ struct ManualCheckView: View {
                 VStack{
                     Form(content: {
                         Section{
-                                Text(string)
-                                    .font(.custom("Futura-Bold", size: 30))
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .foregroundColor(Color.green)
-                                    .padding()
-                               // Text field
+                            Text(string)
+                                .font(.custom("Futura-Bold", size: 30))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .foregroundColor(Color.green)
+                                .padding()
+                            // Text field
                             if (!reset){
                                 TextField("Student ID", text: $id)
                                
@@ -65,12 +65,10 @@ struct ManualCheckView: View {
                                             color = 1
                                         }
                                         else if (blackDict.keys.contains(id.uppercased())){
-                                            print("here")
                                             string = blackDict[id.uppercased()]!
                                             color = 2
                                         }
                                         else {
-                                            print("finally")
                                             string = getName(id: id)
                                             color = 3
                                         }
@@ -86,7 +84,6 @@ struct ManualCheckView: View {
                                     reset = false
                                     id = ""
                                     string = "Manual Check"
-                                    
                                }
                                 .foregroundColor(Color.green)
                             }
@@ -103,3 +100,4 @@ struct ManualCheckView_Previews: PreviewProvider {
         ManualCheckView()
     }
 }
+
