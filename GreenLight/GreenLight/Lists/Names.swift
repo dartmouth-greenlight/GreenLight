@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftUI
-import OrderedCollections
 
 struct Name{
     var name: String
@@ -72,9 +71,9 @@ class ListOfNames : Equatable {
 
 
 let blackList =
-    [Name(name: "Tucker Simpson", id: "F004H39")]
+    [Person(name: "Tucker Simpson", id: "F004H39")]
 let socialList =
-    [Name(name:"Jackson Desmond" , id: "F004HBW")]
+    [Person(name:"Jackson Desmond" , id: "F004HBW")]
 
 let kkg = ["F004GG9" : "Abbey Savin",
            "F004H7F" : "Agatha la Voie ",
