@@ -82,7 +82,13 @@ class CameraViewController: UIViewController {
         cutoutView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         cutoutView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         cutoutView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+        //BLURRED the background outside of ROI cause doormen were not realizing they camera wasn't picking up that stuff
+        //cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.7)
+        let blur = UIBlurEffect(style: .systemUltraThinMaterialDark)
+                let blurView = UIVisualEffectView(effect: blur)
+                blurView.frame = self.view.bounds
+                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cutoutView.addSubview(blurView)
         maskLayer.backgroundColor = UIColor.clear.cgColor
         maskLayer.fillRule = .evenOdd
         cutoutView.layer.mask = maskLayer
@@ -218,6 +224,7 @@ class CameraViewController: UIViewController {
 //        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
     }
     
+    //TODO: Make it only work for portrait orientation
     func setupOrientationAndTransform() {
         // Recalculate the affine transform between Vision coordinates and AVF coordinates.
         
@@ -294,7 +301,7 @@ class CameraViewController: UIViewController {
         // Set zoom and autofocus to help focus on very small text.
         do {
             try captureDevice.lockForConfiguration()
-            captureDevice.videoZoomFactor = 2
+            captureDevice.videoZoomFactor = 1.1
             captureDevice.autoFocusRangeRestriction = .near
             captureDevice.unlockForConfiguration()
         } catch {

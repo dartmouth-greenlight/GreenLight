@@ -37,10 +37,13 @@ struct ScannerView: View {
 
     var body: some View {
         VStack{
-            Text("GreenLight")
-                .font(.custom("Futura-Bold", size: 40))
-                .foregroundColor(.green)
-                .frame(height: 40)
+            ZStack{
+                Color.gray.opacity(0.15)
+                    .ignoresSafeArea()
+                Text("GreenLight")
+                    .font(.custom("Futura-Bold", size: 40))
+                    .foregroundColor(.green)
+            }.frame(height: 45)
             ZStack{
                 CameraView()
                     .ignoresSafeArea()
@@ -50,9 +53,12 @@ struct ScannerView: View {
                     if torchOn {
                         Image(systemName: "flashlight.on.fill")
                             .font(.system(size: 60, weight: .regular))
+                            .foregroundColor(.green)
                     }else{
                         Image(systemName: "flashlight.off.fill")
                             .font(.system(size: 60, weight: .regular))
+                            // need to match this color exactly with unselected tabview items
+                            .foregroundColor(.gray)
                     }
                 }
                 .offset(x: 0, y: 180)
