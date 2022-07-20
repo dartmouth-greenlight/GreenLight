@@ -33,24 +33,26 @@ struct ContentView: View {
     }
     var body: some View {
         TabView{
+            //got rid of text under buttons -- there are only 3 tabs and they are always there, users will remember what they connect to
             ScannerView()
                 .tabItem() {
-                    Image(systemName: "camera.viewfinder")
-                    Text("Scanner")
+                    Image(systemName: "camera.viewfinder").renderingMode(.template)
+                    //Text("Scanner")
                 }
             HubView()
                 .tabItem() {
-                    Image(systemName: "list.bullet.rectangle.fill")
-                    Text("Lists")
+                    Image(systemName: "list.bullet.rectangle.fill").renderingMode(.template)
+                    //Text("Lists")
                 }
             ManualCheckView()
                 .tabItem() {
-                    Image(systemName: "person.text.rectangle")
-                    Text("Manual Check")
+                    Image(systemName: "person.text.rectangle").renderingMode(.template)
+                    //Text("Manual Check")
                 }
-            }
-        }
+        }.accentColor(.green)
+        //switch this to .tint(.green) when ios 15 becomes the norm
     }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
