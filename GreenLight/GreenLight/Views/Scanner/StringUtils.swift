@@ -51,7 +51,7 @@ extension Character {
 }
 
 extension String {
-    // Extracts the first US-style phone number found in the string, returning
+    // Extracts the first Dartmouth ID found in the string, returning
     // the range of the number and the number itself as a tuple.
     // Returns nil if no number is found.
     func extractID() -> (Range<String.Index>, String)? {
