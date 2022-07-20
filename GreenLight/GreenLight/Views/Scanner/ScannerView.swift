@@ -48,10 +48,10 @@ struct ScannerView: View {
                     self.toggleFlash()
                 }label:{
                     if torchOn {
-                        Image(systemName: "flashlight.off.fill")
+                        Image(systemName: "flashlight.on.fill")
                             .font(.system(size: 60, weight: .regular))
                     }else{
-                        Image(systemName: "flashlight.on.fill")
+                        Image(systemName: "flashlight.off.fill")
                             .font(.system(size: 60, weight: .regular))
                     }
                 }
