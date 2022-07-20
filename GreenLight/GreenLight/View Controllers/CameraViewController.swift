@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Vision
 
+//TODO: Can probably delete toggle flash from this jawn
 
 class CameraViewController: UIViewController {
     // MARK: - UI objects
@@ -86,6 +87,7 @@ class CameraViewController: UIViewController {
         maskLayer.fillRule = .evenOdd
         cutoutView.layer.mask = maskLayer
         
+        //TODO: Change font size and color
         // Set up id view.
         idView = UILabel()
         view.addSubview(idView)
@@ -93,7 +95,7 @@ class CameraViewController: UIViewController {
         idView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         idView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         idView.textAlignment = .center
-        idView.layer.cornerRadius = 50
+        idView.layer.cornerRadius = 30
         idView.layer.masksToBounds = true
         idView.textColor = UIColor.black
         idView.sizeToFit()
@@ -102,7 +104,6 @@ class CameraViewController: UIViewController {
         // a dedicated serial dispatch queue to prevent blocking the main thread.
         captureSessionQueue.async {
             self.setupCamera()
-            self.toggleFlash()
             
             // Calculate region of interest now that the camera is setup.
             DispatchQueue.main.async {
@@ -210,6 +211,8 @@ class CameraViewController: UIViewController {
         var idFrame = cutout
         idFrame.origin.y = 0
         idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y - cutout.size.height/2, width: 300, height: 100);
+//        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height/2, width: 300, height: 100);
+
         
 //        idFrame.origin.y += idFrame.size.height
 //        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
