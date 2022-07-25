@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Vision
 
+//TODO: Can probably delete toggle flash from this jawn
 
 class CameraViewController: UIViewController {
     // MARK: - UI objects
@@ -81,11 +82,18 @@ class CameraViewController: UIViewController {
         cutoutView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         cutoutView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         cutoutView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+        //BLURRED the background outside of ROI cause doormen were not realizing they camera wasn't picking up that stuff
+        //cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.7)
+        let blur = UIBlurEffect(style: .systemUltraThinMaterialDark)
+                let blurView = UIVisualEffectView(effect: blur)
+                blurView.frame = self.view.bounds
+                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cutoutView.addSubview(blurView)
         maskLayer.backgroundColor = UIColor.clear.cgColor
         maskLayer.fillRule = .evenOdd
         cutoutView.layer.mask = maskLayer
         
+        //TODO: Change font size and color
         // Set up id view.
         idView = UILabel()
         view.addSubview(idView)
@@ -93,14 +101,15 @@ class CameraViewController: UIViewController {
         idView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         idView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         idView.textAlignment = .center
-        idView.layer.cornerRadius = 50
+        idView.layer.cornerRadius = 30
         idView.layer.masksToBounds = true
+        idView.textColor = UIColor.black
+        idView.sizeToFit()
         
         // Starting the capture session is a blocking call. Perform setup using
         // a dedicated serial dispatch queue to prevent blocking the main thread.
         captureSessionQueue.async {
             self.setupCamera()
-            self.toggleFlash()
             
             // Calculate region of interest now that the camera is setup.
             DispatchQueue.main.async {
@@ -178,7 +187,7 @@ class CameraViewController: UIViewController {
             size = CGSize(width: desiredWidthRatio, height: desiredHeightRatio)
         }
         // Make it centered.
-        regionOfInterest.origin = CGPoint(x: (1 - size.width) / 2, y: (1 - size.height) / 2)
+        regionOfInterest.origin = CGPoint(x: (1 - size.width) / 2, y: 2 * (1 - size.height) / 3)
         regionOfInterest.size = size
                 
         // ROI changed, update transform.
@@ -206,10 +215,16 @@ class CameraViewController: UIViewController {
         // Move the ID view down to under cutout.
         //TODO: Change Properties of idFrame to change idView
         var idFrame = cutout
-        idFrame.origin.y += idFrame.size.height
-        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
+        idFrame.origin.y = 0
+        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y - cutout.size.height/2, width: 300, height: 100);
+//        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height/2, width: 300, height: 100);
+
+        
+//        idFrame.origin.y += idFrame.size.height
+//        idView.frame = CGRect(x: cutout.midX-150, y: cutout.origin.y + cutout.size.height + 50, width: 300, height: 100);
     }
     
+    //TODO: Make it only work for portrait orientation
     func setupOrientationAndTransform() {
         // Recalculate the affine transform between Vision coordinates and AVF coordinates.
         
@@ -286,7 +301,7 @@ class CameraViewController: UIViewController {
         // Set zoom and autofocus to help focus on very small text.
         do {
             try captureDevice.lockForConfiguration()
-            captureDevice.videoZoomFactor = 2
+            captureDevice.videoZoomFactor = 1.1
             captureDevice.autoFocusRangeRestriction = .near
             captureDevice.unlockForConfiguration()
         } catch {
@@ -308,21 +323,20 @@ class CameraViewController: UIViewController {
             DispatchQueue.main.async {
                 // Green case:
                 if(socialDict[string] != nil){
-                    print("here")
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.8))
                     self.idView.text = socialDict[string]
                 }
                 // Red case:
                 else if(blackDict[string] != nil){
                     self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.8))
                     self.idView.text = blackDict[string]
                 }
                 // Yellow case:
                 else{
                     self.cutoutView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.5))
+                    self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.8))
                     self.idView.text = getName(id: string)
                 }
                 
@@ -336,6 +350,7 @@ class CameraViewController: UIViewController {
         captureSessionQueue.async {
             if !self.captureSession.isRunning {
                 self.captureSession.startRunning()
+                self.toggleFlash()
             }
             DispatchQueue.main.async {
                 self.idView.isHidden = true
@@ -369,5 +384,6 @@ extension AVCaptureVideoOrientation {
         }
     }
 }
+
 
 
