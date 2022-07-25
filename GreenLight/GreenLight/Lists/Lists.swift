@@ -7,12 +7,8 @@
 
 import Foundation
 
-var blackList = [Person]()
-var socialList = [Person]()
-var kkgList = [Person]()
-
-
-let lists =
-[GreenLightList(name: "Social List", list: socialList),
- GreenLightList(name: "Black List", list: blackList),
- GreenLightList(name: "KKG", list: kkgList)]
+class Lists: ObservableObject {
+    @Published var lists:[GreenLightList] =  [GreenLightList(name: "Social List", list: socialList),
+                                              GreenLightList(name: "Black List", list: blackList),
+                                              GreenLightList(name: "Beta", list: blackList)]
+}

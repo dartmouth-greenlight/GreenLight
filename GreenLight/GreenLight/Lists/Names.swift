@@ -68,6 +68,14 @@ class ListOfNames : Equatable {
 //    }
 //}
 
+
+let blackList =
+    [Person(name: "Tucker Simpson", id: "F004H39")]
+let socialList =
+    [Person(name:"Jackson Desmond" , id: "F004HBW")]
+let beta = [Person(name:"Jackson Desmond" , id: "F004HBW"), Person(name:"Henry Exall" , id: "F004DPR")]
+
+
 let kkg = ["F004GG9" : "Abbey Savin",
            "F004H7F" : "Agatha la Voie ",
            "F004PKY" : "Alina Chadwick ",

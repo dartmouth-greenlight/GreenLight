@@ -9,6 +9,8 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
+    @EnvironmentObject var lists: Lists
+    
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
@@ -31,6 +33,7 @@ struct ContentView: View {
             print(error)
         }
     }
+    
     var body: some View {
         TabView{
             //got rid of text under buttons -- there are only 3 tabs and they are always there, users will remember what they connect to

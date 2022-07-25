@@ -8,36 +8,36 @@
 import SwiftUI
 
 struct ListView: View {
+    @State private var editMode = EditMode.inactive
+    @State var names: [Person]
     var title: String
-    var names: [Person]
     
     init(title: String, names: [Person]) {
         self.title = title
-        self.names = names
-        UITableView.appearance().backgroundColor = .clear
+        _names = State<[Person]>(initialValue: names)
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.green]
+        
     }
     var body: some View {
-        ZStack{
-            Color(.white)
-                .edgesIgnoringSafeArea(.all)
-            VStack{
-                Text(self.title)
-                    .foregroundColor(.black)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                List(names, id: \.name){ name in
-                    VStack(alignment: .leading, spacing: 5){
-                        Text(name.name)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                        Text(name.id)
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                    }
-                    .listRowBackground(Color.white)
+        List() {
+            ForEach(names, id: \.name) { name in
+                VStack(alignment: .leading, spacing: 5){
+                    Text(name.name)
+                        .fontWeight(.semibold)
+                    Text(name.id)
+                        .font(.subheadline)
                 }
             }
+            .onDelete(perform: onDeletePress)
         }
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.large)
+        .navigationBarItems(trailing: EditButton())
+    }
+    private func onDeletePress(offsets: IndexSet) {
+        names.remove(atOffsets: offsets)
     }
 }
 
