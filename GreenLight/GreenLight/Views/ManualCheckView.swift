@@ -22,74 +22,82 @@ struct ManualCheckView: View {
     var backgroundColor: Color{
         if(color == 0)
         {
-            return Color.gray.opacity(0.15);
+            return Color.clear;
         }
         else if (color == 1)
         {
-            return Color.green.opacity(0.8);
+            //return Color.green.opacity(0.8);
+            return Color.green;
         }
         else if (color == 2)
         {
-            return Color.red.opacity(0.8);
+            //return Color.red.opacity(0.8);
+            return Color.red;
+
         }
         else
         {
-            return Color.yellow.opacity(0.8);
+            return Color.yellow
+            //return Color.yellow.opacity(0.8);
         }
     }
     var body: some View {
-        NavigationView {
+        VStack{
+            ZStack{
+                Color.gray.opacity(0.15)
+                    .ignoresSafeArea()
+                Text("GreenLight")
+                    .font(.custom("Futura-Bold", size: 40))
+                    .foregroundColor(.green)
+            }.frame(height: 45)
             ZStack{
                 backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                VStack{
-                    Form(content: {
-                        Section{
-                            Text(string)
-                                .font(.custom("Futura-Bold", size: 30))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .foregroundColor(Color.green)
-                                .padding()
-                            // Text field
-                            if (!reset){
-                                TextField("Student ID", text: $id)
-                               
-                                // Button
-                                Button("Check") {
-                                    
-                                    if(id != ""){
-                                        reset = true
-
-                                        if (socialDict.keys.contains(id.uppercased())) {
-                                            string = socialDict[id.uppercased()]!
-                                            color = 1
-                                        }
-                                        else if (blackDict.keys.contains(id.uppercased())){
-                                            string = blackDict[id.uppercased()]!
-                                            color = 2
-                                        }
-                                        else {
-                                            string = getName(id: id)
-                                            color = 3
-                                        }
+                Form(content: {
+                    Section{
+                        Text(string)
+                            .font(.custom("Futura-Bold", size: 30))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(Color.white)
+                            .padding()
+                        // Text field
+                        if (!reset){
+                            TextField("Student ID", text: $id)
+                            
+                            // Button
+                            Button("Check") {
+                                
+                                if(id != ""){
+                                    reset = true
+                                    if (socialDict.keys.contains(id.uppercased())) {
+                                        string = socialDict[id.uppercased()]!
+                                        color = 1
                                     }
-                               }
-                                .foregroundColor(Color.green)
+                                    else if (blackDict.keys.contains(id.uppercased())){
+                                        string = blackDict[id.uppercased()]!
+                                        color = 2
+                                    }
+                                    else {
+                                        string = getName(id: id)
+                                        color = 3
+                                    }
+                                }
                             }
+                            .foregroundColor(Color.white)
                         }
-                        if reset {
-                            Section {
-                                Button("Check Another ID") {
-                                    color = 0
-                                    reset = false
-                                    id = ""
-                                    string = "Manual Check"
-                               }
-                                .foregroundColor(Color.green)
+                    }
+                    if reset {
+                        Section {
+                            Button("Check Another ID") {
+                                color = 0
+                                reset = false
+                                id = ""
+                                string = "Manual Check"
                             }
+                            .foregroundColor(Color.white)
                         }
-                    })
-                }
+                    }
+                }).padding()
             }
         }
     }

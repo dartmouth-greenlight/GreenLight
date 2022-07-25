@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48BEE512288E321200D5A08A /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BEE511288E321200D5A08A /* Property.swift */; };
 		48C0AC62286A839800A5D068 /* LookupAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0AC61286A839800A5D068 /* LookupAPIs.swift */; };
 		48FB954E2886075100D1A180 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB954D2886075100D1A180 /* PreviewView.swift */; };
 		7B05BDF228769A2C00A5E5CA /* AddSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B05BDF128769A2B00A5E5CA /* AddSearch.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48BEE511288E321200D5A08A /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		48C0AC61286A839800A5D068 /* LookupAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupAPIs.swift; sourceTree = "<group>"; };
 		48FB954D2886075100D1A180 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		7B05BDF128769A2B00A5E5CA /* AddSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSearch.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				7B9936462882099100F54C0F /* GreenLightList.swift */,
 				7B99364A28820F2D00F54C0F /* Person.swift */,
+				48BEE511288E321200D5A08A /* Property.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				7B9936472882099100F54C0F /* GreenLightList.swift in Sources */,
 				7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */,
 				7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */,
+				48BEE512288E321200D5A08A /* Property.swift in Sources */,
 				7B39AB3E282C7A04005FCA5C /* StringUtils.swift in Sources */,
 				7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */,
 				48FB954E2886075100D1A180 /* PreviewView.swift in Sources */,

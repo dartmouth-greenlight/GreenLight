@@ -84,7 +84,7 @@ class CameraViewController: UIViewController {
         cutoutView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         //BLURRED the background outside of ROI cause doormen were not realizing they camera wasn't picking up that stuff
         //cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.7)
-        let blur = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blur = UIBlurEffect(style: .systemUltraThinMaterialLight)
                 let blurView = UIVisualEffectView(effect: blur)
                 blurView.frame = self.view.bounds
                 blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -156,7 +156,9 @@ class CameraViewController: UIViewController {
                 device.torchMode = AVCaptureDevice.TorchMode.off
             } else {
                 do {
-                    try device.setTorchModeOn(level: 1.0)
+                    if(Property.sharedInstance.flashOn){
+                        try device.setTorchModeOn(level: 1.0)
+                    }
                 } catch {
                     print(error)
                 }
