@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		48C0AC62286A839800A5D068 /* LookupAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0AC61286A839800A5D068 /* LookupAPIs.swift */; };
 		7B05BDF228769A2C00A5E5CA /* AddSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B05BDF128769A2B00A5E5CA /* AddSearch.swift */; };
+		7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B31E3A9288B53CB00E52A6A /* AddListView.swift */; };
 		7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */; };
 		7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB0B282C77B2005FCA5C /* ContentView.swift */; };
 		7B39AB0E282C77B7005FCA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B39AB0D282C77B7005FCA5C /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		48C0AC61286A839800A5D068 /* LookupAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupAPIs.swift; sourceTree = "<group>"; };
 		7B05BDF128769A2B00A5E5CA /* AddSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSearch.swift; sourceTree = "<group>"; };
+		7B31E3A9288B53CB00E52A6A /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		7B39AB06282C77B2005FCA5C /* GreenLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightApp.swift; sourceTree = "<group>"; };
 		7B39AB0B282C77B2005FCA5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				7B39AB35282C7840005FCA5C /* ListView.swift */,
 				7B05BDF128769A2B00A5E5CA /* AddSearch.swift */,
 				7B99364C2882183E00F54C0F /* ListRow.swift */,
+				7B31E3A9288B53CB00E52A6A /* AddListView.swift */,
 			);
 			path = "List Hub";
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				7B39AB36282C7840005FCA5C /* ListView.swift in Sources */,
 				7B9936472882099100F54C0F /* GreenLightList.swift in Sources */,
 				7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */,
+				7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */,
 				7B39AB3E282C7A04005FCA5C /* StringUtils.swift in Sources */,
 				7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */,
 				7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */,

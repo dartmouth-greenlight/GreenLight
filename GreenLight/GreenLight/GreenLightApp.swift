@@ -12,6 +12,7 @@ struct GreenLightApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(Lists())
         }
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
+    @EnvironmentObject var lists: Lists
+    
     var body: some View {
         TabView{
             ScannerView()
