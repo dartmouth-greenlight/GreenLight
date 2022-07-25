@@ -75,18 +75,32 @@ func getName(id: String) -> String {
     return user
 }
 
-func getID(name: String) -> [Person]{
+//TODO: If no names are returned, search for person's last name. If nothing returned, search for first name. If nothing returned, exit.
+func getID(name: String, searchNum: Int? = 1) -> [Person]{
+    let original = name
     //Building URL
     var name = name.split(separator: " ")
+    var fullName = ""
     
     //TODO: Make this more robust - e.g., let obvious typos still work -- will we be able to use spell check built in on keyboard?
-    let first = name[0]
-    let last = name.removeLast()
-    var fullName = ""
-    if(first != last && last != " "){
-        fullName = first + "_" + last
-    }else{
-        fullName += first
+    if searchNum == 1{
+        let first = name[0]
+        let last = name.removeLast()
+        if(first != last && last != " "){
+            fullName = first + "_" + last
+        }else{
+            fullName += first
+        }
+    }
+    
+    // Search last name
+    else if searchNum == 2 {
+        fullName += name.removeLast()
+    }
+    
+    //Search first name
+    else if searchNum == 3 {
+        fullName += name[0]
     }
     
     let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(fullName)"
@@ -146,9 +160,13 @@ func getID(name: String) -> [Person]{
     
     semaphore.wait()    // 3. Wait for semaphore
     
-    //Play around with this so results are most relevant
-    let sortedNames = names.sorted {
-        $0.year < $1.year
+    if (names.isEmpty && searchNum == 1){
+        return getID(name: original, searchNum: 2)
+    }else if(names.isEmpty && searchNum == 2){
+        return getID(name: original, searchNum: 3)
+    }else{
+        return names.sorted {
+            $0.year < $1.year
+        }
     }
-    return sortedNames
 }

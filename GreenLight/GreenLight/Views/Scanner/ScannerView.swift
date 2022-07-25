@@ -10,6 +10,10 @@ import AVFoundation
 
 struct ScannerView: View {
     @State var torchOn = false
+    init(){
+        Property.sharedInstance.flashOn = false
+        
+    }
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
@@ -19,10 +23,14 @@ struct ScannerView: View {
 
             if (device.torchMode == AVCaptureDevice.TorchMode.on) {
                 device.torchMode = AVCaptureDevice.TorchMode.off
+                Property.sharedInstance.flashOn = false
+                Property.sharedInstance.flashInScanner = false
                 torchOn = false
             } else {
                 do {
                     try device.setTorchModeOn(level: 1.0)
+                    Property.sharedInstance.flashOn = true
+                    Property.sharedInstance.flashInScanner = true
                     torchOn = true
                 } catch {
                     print(error)
@@ -64,7 +72,6 @@ struct ScannerView: View {
                 .offset(x: 0, y: 180)
             }
         }
-        
     }
 }
 

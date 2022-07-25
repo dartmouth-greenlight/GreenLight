@@ -9,8 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @EnvironmentObject var lists: Lists
-    
+    @State var onManualCheckView = false
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
@@ -33,7 +32,6 @@ struct ContentView: View {
             print(error)
         }
     }
-    
     var body: some View {
         TabView{
             //got rid of text under buttons -- there are only 3 tabs and they are always there, users will remember what they connect to
@@ -41,6 +39,16 @@ struct ContentView: View {
                 .tabItem() {
                     Image(systemName: "camera.viewfinder").renderingMode(.template)
                     //Text("Scanner")
+                }.onDisappear(){
+                    if(Property.sharedInstance.flashOn){
+                        Property.sharedInstance.flashOn = false
+                        toggleFlash()
+                    }
+                }.onAppear(){
+                    if(Property.sharedInstance.flashInScanner){
+                        Property.sharedInstance.flashOn = true
+                        toggleFlash()
+                    }
                 }
             HubView()
                 .tabItem() {
@@ -52,6 +60,9 @@ struct ContentView: View {
                     Image(systemName: "person.text.rectangle").renderingMode(.template)
                     //Text("Manual Check")
                 }
+//                .onAppear(){
+//                    Property.sharedInstance.onManualCheckView = true
+//                }
         }.accentColor(.green)
         //switch this to .tint(.green) when ios 15 becomes the norm
     }
