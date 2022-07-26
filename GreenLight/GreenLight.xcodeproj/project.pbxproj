@@ -150,13 +150,13 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		48C0AC69286A927900A5D068 /* Lists */ = {
+		48C0AC69286A927900A5D068 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				7B39AB37282C7927005FCA5C /* Names.swift */,
 				7B99364E2884E64400F54C0F /* Lists.swift */,
 			);
-			path = Lists;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		7B39AAFD282C77B2005FCA5C = {
@@ -182,14 +182,14 @@
 		7B39AB08282C77B2005FCA5C /* GreenLight */ = {
 			isa = PBXGroup;
 			children = (
-				7B9936452882094900F54C0F /* Objects */,
-				48C0AC69286A927900A5D068 /* Lists */,
+				7BE6114E288F7C2700AF1F3A /* ViewModels */,
+				7BE6114D288F7C1800AF1F3A /* Models */,
+				48C0AC69286A927900A5D068 /* Data */,
 				48C0AC67286A920F00A5D068 /* View Controllers */,
 				48C0AC63286A90BE00A5D068 /* Views */,
 				7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */,
 				7B39AB0D282C77B7005FCA5C /* Assets.xcassets */,
 				7B39AB0F282C77B7005FCA5C /* Preview Content */,
-				48C0AC61286A839800A5D068 /* LookupAPIs.swift */,
 			);
 			path = GreenLight;
 			sourceTree = "<group>";
@@ -219,14 +219,22 @@
 			path = GreenLightUITests;
 			sourceTree = "<group>";
 		};
-		7B9936452882094900F54C0F /* Objects */ = {
+		7BE6114D288F7C1800AF1F3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7B9936462882099100F54C0F /* GreenLightList.swift */,
 				7B99364A28820F2D00F54C0F /* Person.swift */,
 				48BEE511288E321200D5A08A /* Property.swift */,
 			);
-			path = Objects;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7BE6114E288F7C2700AF1F3A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				48C0AC61286A839800A5D068 /* LookupAPIs.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
