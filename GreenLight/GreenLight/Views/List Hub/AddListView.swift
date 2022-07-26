@@ -11,6 +11,7 @@ struct AddListView: View {
     @State var name: String = ""
     @State var showView = false
     @EnvironmentObject var lists: Lists
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
@@ -22,12 +23,25 @@ struct AddListView: View {
                         .foregroundColor(Color.green)
                         .padding()
                     // Text field
-                    TextField("List Name", text: $name)
-                   
+                    if #available(iOS 15.0, *) {
+                        TextField("List Name", text: $name)
+                            .onSubmit {
+                                if name != "" {
+                                    lists.lists.append(GreenLightList(name: name, list: []))
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }
+                    } else {
+                        TextField("List Name", text: $name)
+                    }
                     // Button
                     Button("Create List") {
                         showView.toggle()
-                        lists.lists.append(GreenLightList(name: name, list: []))
+                        //TODO: make sure there are no lists with the same name
+                        if name != "" {
+                            lists.lists.append(GreenLightList(name: name, list: []))
+                            presentationMode.wrappedValue.dismiss()
+                        }
                    }
                     .foregroundColor(Color.green)
 
