@@ -16,7 +16,7 @@ class CameraViewController: UIViewController {
     // MARK: - UI objects
     var previewView: PreviewView!
     var cutoutView: UIView!
-    var idView: UILabel!     //pretty sure this is the box that comes w ID
+    var idView: UILabel!
     var maskLayer = CAShapeLayer()
     // Device orientation. Updated whenever the orientation changes to a
     // different supported orientation.
@@ -93,7 +93,6 @@ class CameraViewController: UIViewController {
         maskLayer.fillRule = .evenOdd
         cutoutView.layer.mask = maskLayer
         
-        //TODO: Change font size and color
         // Set up id view.
         idView = UILabel()
         view.addSubview(idView)
@@ -104,6 +103,8 @@ class CameraViewController: UIViewController {
         idView.layer.cornerRadius = 30
         idView.layer.masksToBounds = true
         idView.textColor = UIColor.black
+        idView.font = UIFont.boldSystemFont(ofSize: 20)
+        //idView.adjustsFontSizeToFitWidth = true
         idView.sizeToFit()
         
         // Starting the capture session is a blocking call. Perform setup using
@@ -320,6 +321,8 @@ class CameraViewController: UIViewController {
         // Found a definite ID.
         // Stop the camera synchronously to ensure that no further buffers are
         // received. Then update the ID view asynchronously.
+        Property.sharedInstance.foundString = true
+        
         captureSessionQueue.sync {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
@@ -351,6 +354,7 @@ class CameraViewController: UIViewController {
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         captureSessionQueue.async {
             if !self.captureSession.isRunning {
+                Property.sharedInstance.foundString = false
                 self.captureSession.startRunning()
                 self.toggleFlash()
             }

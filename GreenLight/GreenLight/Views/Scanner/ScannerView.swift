@@ -55,21 +55,23 @@ struct ScannerView: View {
             ZStack{
                 CameraView()
                     .ignoresSafeArea()
-                Button(){
-                    self.toggleFlash()
-                }label:{
-                    if torchOn {
-                        Image(systemName: "flashlight.on.fill")
-                            .font(.system(size: 60, weight: .regular))
-                            .foregroundColor(.green)
-                    }else{
-                        Image(systemName: "flashlight.off.fill")
-                            .font(.system(size: 60, weight: .regular))
-                            // need to match this color exactly with unselected tabview items
-                            .foregroundColor(.gray)
+                if(!Property.sharedInstance.foundString){
+                    Button(){
+                        self.toggleFlash()
+                    }label:{
+                        if torchOn {
+                            Image(systemName: "flashlight.on.fill")
+                                .font(.system(size: 60, weight: .regular))
+                                .foregroundColor(.green)
+                        }else{
+                            Image(systemName: "flashlight.off.fill")
+                                .font(.system(size: 60, weight: .regular))
+                                // need to match this color exactly with unselected tabview items
+                                .foregroundColor(.gray)
+                        }
                     }
+                    .offset(x: 0, y: 180)
                 }
-                .offset(x: 0, y: 180)
             }
         }
     }

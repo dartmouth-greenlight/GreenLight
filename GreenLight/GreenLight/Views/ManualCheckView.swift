@@ -30,17 +30,19 @@ struct ManualCheckView: View {
         {
             return Color.clear;
         }
+        
         else if (color == 1)
         {
             //return Color.green.opacity(0.8);
             return Color.green;
         }
+        
         else if (color == 2)
         {
             //return Color.red.opacity(0.8);
             return Color.red;
-
         }
+        
         else
         {
             return Color.yellow
