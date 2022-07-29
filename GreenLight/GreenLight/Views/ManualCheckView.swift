@@ -11,7 +11,7 @@ import SwiftUI
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
     init(){
-            UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().backgroundColor = .systemGroupedBackground
         }
     
     @State var id: String = ""
@@ -22,7 +22,7 @@ struct ManualCheckView: View {
     var backgroundColor: Color{
         if(color == 0)
         {
-            return Color.clear;
+            return Color(UIColor.secondarySystemBackground);
         }
         else if (color == 1)
         {
@@ -44,10 +44,8 @@ struct ManualCheckView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.gray.opacity(0.15)
-                    .ignoresSafeArea()
                 Text("GreenLight")
-                    .font(.custom("Futura-Bold", size: 40))
+                    .font(.custom("Futura-Bold", size: 30))
                     .foregroundColor(.green)
             }.frame(height: 45)
             ZStack{
@@ -58,7 +56,6 @@ struct ManualCheckView: View {
                         Text(string)
                             .font(.custom("Futura-Bold", size: 30))
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(Color.white)
                             .padding()
                         // Text field
                         if (!reset){
@@ -69,8 +66,8 @@ struct ManualCheckView: View {
                                 
                                 if(id != ""){
                                     reset = true
-                                    if (socialDict.keys.contains(id.uppercased())) {
-                                        string = socialDict[id.uppercased()]!
+                                    if (betapalooza.keys.contains(id.uppercased())) {
+                                        string = betapalooza[id.uppercased()]!
                                         color = 1
                                     }
                                     else if (blackDict.keys.contains(id.uppercased())){
@@ -83,7 +80,6 @@ struct ManualCheckView: View {
                                     }
                                 }
                             }
-                            .foregroundColor(Color.white)
                         }
                     }
                     if reset {
@@ -94,7 +90,6 @@ struct ManualCheckView: View {
                                 id = ""
                                 string = "Manual Check"
                             }
-                            .foregroundColor(Color.white)
                         }
                     }
                 }).padding()

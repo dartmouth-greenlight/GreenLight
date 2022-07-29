@@ -52,12 +52,12 @@ struct ContentView: View {
                 }
             HubView()
                 .tabItem() {
-                    Image(systemName: "list.bullet.rectangle.fill").renderingMode(.template)
+                    Image(systemName: "list.bullet").renderingMode(.template)
                     //Text("Lists")
                 }
             ManualCheckView()
                 .tabItem() {
-                    Image(systemName: "person.text.rectangle").renderingMode(.template)
+                    Image(systemName: "person.crop.circle.badge.checkmark").renderingMode(.template)
                     //Text("Manual Check")
                 }
 //                .onAppear(){

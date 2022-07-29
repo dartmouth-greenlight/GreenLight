@@ -46,10 +46,8 @@ struct ScannerView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.gray.opacity(0.15)
-                    .ignoresSafeArea()
                 Text("GreenLight")
-                    .font(.custom("Futura-Bold", size: 40))
+                    .font(.custom("Futura-Bold", size: 30))
                     .foregroundColor(.green)
             }.frame(height: 45)
             ZStack{

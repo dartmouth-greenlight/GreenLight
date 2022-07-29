@@ -210,7 +210,7 @@ class CameraViewController: UIViewController {
         let cutout = previewView.videoPreviewLayer.layerRectConverted(fromMetadataOutputRect: regionOfInterest.applying(roiRectTransform))
         
         // Create the mask.
-        let path = UIBezierPath(roundedRect: cutoutView.frame, cornerRadius:10)
+        let path = UIBezierPath(roundedRect: cutoutView.frame, cornerRadius:0)
         path.append(UIBezierPath(roundedRect: cutout, cornerRadius:10))
         maskLayer.path = path.cgPath
         
@@ -324,10 +324,10 @@ class CameraViewController: UIViewController {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
                 // Green case:
-                if(socialDict[string] != nil){
+                if(betapalooza[string] != nil){
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.8))
-                    self.idView.text = socialDict[string]
+                    self.idView.text = betapalooza[string]
                 }
                 // Red case:
                 else if(blackDict[string] != nil){

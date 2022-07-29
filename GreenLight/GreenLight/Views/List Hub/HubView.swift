@@ -14,8 +14,8 @@ struct HubView: View {
     
     init() {
         let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.green]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: Color.green]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: Color.green]
         navBarAppearance.tintColor = .green
         
     }
@@ -32,6 +32,7 @@ struct HubView: View {
                 }
                 .onDelete(perform: onDeletePress)
             }
+            .listStyle(.insetGrouped)
             .navigationTitle("Lists")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarItems(leading: addButtonPress, trailing: EditButton())
