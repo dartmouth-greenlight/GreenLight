@@ -14,8 +14,8 @@ struct HubView: View {
     
     init() {
         let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: Color.green]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: Color.green]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.green]
         navBarAppearance.tintColor = .green
         
     }
