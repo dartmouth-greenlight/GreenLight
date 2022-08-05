@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 //TODO: fix bugginess when viewing in horizontal
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
@@ -41,6 +47,12 @@ struct ManualCheckView: View {
             //return Color.yellow.opacity(0.8);
         }
     }
+    
+    var background: some View{
+        backgroundColor
+            .ignoresSafeArea()
+    }
+    
     var body: some View {
         VStack{
             ZStack{
@@ -49,8 +61,9 @@ struct ManualCheckView: View {
                     .foregroundColor(.green)
             }.frame(height: 45)
             ZStack{
-                backgroundColor
-                    .edgesIgnoringSafeArea(.all)
+                background.onTapGesture {
+                    hideKeyboard()
+                }
                 Form(content: {
                     Section{
                         Text(string)
@@ -59,10 +72,35 @@ struct ManualCheckView: View {
                             .padding()
                         // Text field
                         if (!reset){
-                            TextField("Student ID", text: $id)
-                            
+                            if #available(iOS 15.0, *) {
+                                TextField("Student ID", text: $id)
+                                    .disableAutocorrection(true)
+                                    .onSubmit {
+                                        hideKeyboard()
+                                        if(id != ""){
+                                            reset = true
+                                            if (socialDict.keys.contains(id.uppercased())) {
+                                                string = socialDict[id.uppercased()]!
+                                                color = 1
+                                            }
+                                            else if (blackDict.keys.contains(id.uppercased())){
+                                                string = blackDict[id.uppercased()]!
+                                                color = 2
+                                            }
+                                            else {
+                                                string = getName(id: id)
+                                                color = 3
+                                            }
+                                        }
+                                    }
+                            } else {
+                                TextField("Student ID", text: $id)
+                                    .disableAutocorrection(true)
+                            }
+
                             // Button
                             Button("Check") {
+                                hideKeyboard()
                                 
                                 if(id != ""){
                                     reset = true
