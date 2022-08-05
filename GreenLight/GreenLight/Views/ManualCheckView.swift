@@ -24,11 +24,17 @@ struct ManualCheckView: View {
     @State var color: Int = 0
     @State var reset: Bool = false
     @State var string: String = "Manual Check"
+    @Environment(\.colorScheme) var colorScheme
     
     var backgroundColor: Color{
         if(color == 0)
         {
-            return Color(UIColor.secondarySystemBackground);
+            if (colorScheme == .light) {
+                return Color(UIColor.secondarySystemBackground);
+            }
+            else {
+                return Color(.black)
+            }
         }
         else if (color == 1)
         {
@@ -67,7 +73,8 @@ struct ManualCheckView: View {
                 Form(content: {
                     Section{
                         Text(string)
-                            .font(.custom("Futura-Bold", size: 30))
+                            .font(.custom("Futura-Bold", size: 20))
+                            .foregroundColor(.green)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding()
                         // Text field
