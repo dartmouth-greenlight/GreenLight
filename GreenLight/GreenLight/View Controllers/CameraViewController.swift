@@ -10,8 +10,6 @@ import UIKit
 import AVFoundation
 import Vision
 
-//TODO: Can probably delete toggle flash from this jawn
-
 class CameraViewController: UIViewController {
     // MARK: - UI objects
     var previewView: PreviewView!
@@ -256,7 +254,7 @@ class CameraViewController: UIViewController {
             self.updateCutout()
         }
     }
-    
+
     func updateCutout() {
         // Figure out where the cutout ends up in layer coordinates.
         let roiRectTransform = bottomToTopTransform.concatenating(uiRotationTransform)
@@ -509,6 +507,3 @@ extension AVCaptureVideoOrientation {
         }
     }
 }
-
-
-
