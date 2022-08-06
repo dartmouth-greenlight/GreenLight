@@ -38,7 +38,7 @@ struct HubView: View {
             .navigationBarItems(leading: addButtonPress, trailing: EditButton())
         }
         .sheet(isPresented: $showView) {
-            AddListView()
+            AddSearch(viewModel: SearchViewModel())
         }
     }
     

@@ -11,17 +11,17 @@ import Foundation
 //TODO: Make more robust for typos, nicknames, common names, etc.
 
 // sections of the json object the api returns
-struct IDLookUp: Codable {
+struct IDLookUp: Decodable {
     let truncated: Bool
     let users: [User]
 }
 
-struct User: Codable {
-    let uid : String
-    let mail: Optional<String>
-    let eduPersonPrimaryAffiliation: String
-    let displayName: String
-}
+//struct User: Decodable {
+    //let uid : String
+    //let mail: Optional<String>
+    //let eduPersonPrimaryAffiliation: String
+   // let displayName: String
+//}
 
 enum MyError: Error {
     case runtimeError(String)
