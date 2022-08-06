@@ -16,20 +16,24 @@ class CameraViewController: UIViewController {
     // MARK: - UI objects
     var previewView: PreviewView!
     var cutoutView: UIView!
-    var idView: UILabel!     //pretty sure this is the box that comes w ID
+    var idView: UILabel!
+    var flashlight: UIButton!
+    var admitButton: UIButton!
+    var denyButton: UIButton!
     var maskLayer = CAShapeLayer()
+    var yellow = false
     // Device orientation. Updated whenever the orientation changes to a
     // different supported orientation.
     var currentOrientation = UIDeviceOrientation.portrait
     
     // MARK: - Capture related objects
     private let captureSession = AVCaptureSession()
-    let captureSessionQueue = DispatchQueue(label: "com.example.apple-samplecode.CaptureSessionQueue")
+    let captureSessionQueue = DispatchQueue(label: "GreenLight.CaptureSessionQueue")
     
     var captureDevice: AVCaptureDevice?
     
     var videoDataOutput = AVCaptureVideoDataOutput()
-    let videoDataOutputQueue = DispatchQueue(label: "com.example.apple-samplecode.VideoDataOutputQueue")
+    let videoDataOutputQueue = DispatchQueue(label: "GreenLight.VideoDataOutputQueue")
     
     // MARK: - Region of interest (ROI) and text orientation
     // Region of video data output buffer that recognition should be run on.
@@ -93,7 +97,6 @@ class CameraViewController: UIViewController {
         maskLayer.fillRule = .evenOdd
         cutoutView.layer.mask = maskLayer
         
-        //TODO: Change font size and color
         // Set up id view.
         idView = UILabel()
         view.addSubview(idView)
@@ -104,7 +107,56 @@ class CameraViewController: UIViewController {
         idView.layer.cornerRadius = 30
         idView.layer.masksToBounds = true
         idView.textColor = UIColor.black
+        idView.font = UIFont.boldSystemFont(ofSize: 20)
+        //idView.adjustsFontSizeToFitWidth = true
         idView.sizeToFit()
+        
+        // Configuration for SF Symbol Buttons
+        let config = UIImage.SymbolConfiguration(pointSize: 60, weight: .medium, scale: .default)
+        
+        // Set up for flashlight button
+        let flashOn = UIImage(systemName: "flashlight.on.fill", withConfiguration: config)?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        let flashOff = UIImage(systemName: "flashlight.off.fill", withConfiguration: config)?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        flashlight = UIButton()
+        view.addSubview(flashlight)
+        if(Property.sharedInstance.flashOn){
+            flashlight.setImage(flashOn, for: .normal)
+        }else{
+            flashlight.setImage(flashOff, for: .normal)
+        }
+        flashlight.translatesAutoresizingMaskIntoConstraints = false
+        flashlight.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        flashlight.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 150).isActive = true
+        flashlight.layer.masksToBounds = true
+        flashlight.addTarget(self, action:#selector(self.flashClicked), for: .touchUpInside)
+        
+        // Set up for admit / deny button for yellow case
+        let config2 = UIImage.SymbolConfiguration(pointSize: 80, weight: .medium, scale: .default)
+        
+        // Admit button
+        admitButton = UIButton()
+        view.addSubview(admitButton)
+        let admitImage = UIImage(systemName: "checkmark.circle.fill", withConfiguration: config2)?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        admitButton.setImage(admitImage, for: .normal)
+        admitButton.translatesAutoresizingMaskIntoConstraints = false
+        admitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
+        admitButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 150).isActive = true
+        admitButton.layer.masksToBounds = true
+        admitButton.addTarget(self, action:#selector(self.admitClicked), for: .touchUpInside)
+        admitButton.isHidden = true
+        
+        // Deny button
+        denyButton = UIButton()
+        view.addSubview(denyButton)
+        let denyImage = UIImage(systemName: "xmark.circle.fill", withConfiguration: config2)?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+        denyButton.setImage(denyImage, for: .normal)
+        denyButton.translatesAutoresizingMaskIntoConstraints = false
+        denyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
+        denyButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 150).isActive = true
+        denyButton.layer.masksToBounds = true
+        denyButton.addTarget(self, action:#selector(self.denyClicked), for: .touchUpInside)
+        denyButton.isHidden = true
+        
         
         // Starting the capture session is a blocking call. Perform setup using
         // a dedicated serial dispatch queue to prevent blocking the main thread.
@@ -148,17 +200,19 @@ class CameraViewController: UIViewController {
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
-
+        
         do {
             try device.lockForConfiguration()
 
             if (device.torchMode == AVCaptureDevice.TorchMode.on) {
                 device.torchMode = AVCaptureDevice.TorchMode.off
+                Property.sharedInstance.flashOn = false
+                Property.sharedInstance.flashInScanner = false
             } else {
                 do {
-                    if(Property.sharedInstance.flashOn){
-                        try device.setTorchModeOn(level: 1.0)
-                    }
+                    try device.setTorchModeOn(level: 1.0)
+                    Property.sharedInstance.flashOn = true
+                    Property.sharedInstance.flashInScanner = true
                 } catch {
                     print(error)
                 }
@@ -320,6 +374,7 @@ class CameraViewController: UIViewController {
         // Found a definite ID.
         // Stop the camera synchronously to ensure that no further buffers are
         // received. Then update the ID view asynchronously.
+        
         captureSessionQueue.sync {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
@@ -340,22 +395,90 @@ class CameraViewController: UIViewController {
                     self.cutoutView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.yellow.withAlphaComponent((0.8))
                     self.idView.text = getName(id: string)
+                    self.admitButton.isHidden = false
+                    self.denyButton.isHidden = false
+                    Property.sharedInstance.yellow = true
                 }
                 
                // self.idView.text = string
                 self.idView.isHidden = false
+                self.flashlight.isHidden = true
             }
         }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        if(!Property.sharedInstance.yellow){
+            captureSessionQueue.async {
+                if !self.captureSession.isRunning {
+                    Property.sharedInstance.foundString = false
+                    self.captureSession.startRunning()
+                    if(Property.sharedInstance.flashOn){
+                        self.toggleFlash()
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.idView.isHidden = true
+                    self.flashlight.isHidden = false
+                    self.admitButton.isHidden = true
+                    self.denyButton.isHidden = true
+                    self.cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+                }
+            }
+        }
+    }
+    
+    @objc func flashClicked() {
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 60, weight: .medium, scale: .default)
+        let flashOn = UIImage(systemName: "flashlight.on.fill", withConfiguration: config)?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        let flashOff = UIImage(systemName: "flashlight.off.fill", withConfiguration: config)?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        
+        self.toggleFlash()
+        if(Property.sharedInstance.flashOn){
+            self.flashlight.setImage(flashOn, for: .normal)
+        }else{
+            self.flashlight.setImage(flashOff, for: .normal)
+        }
+    }
+    
+    @objc func admitClicked() {
+        print("admit")
+        Property.sharedInstance.yellow = false
         captureSessionQueue.async {
             if !self.captureSession.isRunning {
+                Property.sharedInstance.foundString = false
                 self.captureSession.startRunning()
-                self.toggleFlash()
+                if(Property.sharedInstance.flashOn){
+                    self.toggleFlash()
+                }
             }
             DispatchQueue.main.async {
                 self.idView.isHidden = true
+                self.flashlight.isHidden = false
+                self.admitButton.isHidden = true
+                self.denyButton.isHidden = true
+                self.cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+            }
+        }
+    }
+    
+    @objc func denyClicked() {
+        print("deny")
+        Property.sharedInstance.yellow = false
+        captureSessionQueue.async {
+            if !self.captureSession.isRunning {
+                Property.sharedInstance.foundString = false
+                self.captureSession.startRunning()
+                if(Property.sharedInstance.flashOn){
+                    self.toggleFlash()
+                }
+            }
+            DispatchQueue.main.async {
+                self.idView.isHidden = true
+                self.flashlight.isHidden = false
+                self.admitButton.isHidden = true
+                self.denyButton.isHidden = true
                 self.cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
             }
         }

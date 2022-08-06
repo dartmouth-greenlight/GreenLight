@@ -60,9 +60,6 @@ struct ContentView: View {
                     Image(systemName: "person.text.rectangle").renderingMode(.template)
                     //Text("Manual Check")
                 }
-//                .onAppear(){
-//                    Property.sharedInstance.onManualCheckView = true
-//                }
         }.accentColor(.green)
         //switch this to .tint(.green) when ios 15 becomes the norm
     }

@@ -16,9 +16,6 @@ extension View {
 //TODO: fix bugginess when viewing in horizontal
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
-    init(){
-            UITableView.appearance().backgroundColor = .clear
-        }
     
     @State var id: String = ""
     @State var color: Int = 0
@@ -30,17 +27,19 @@ struct ManualCheckView: View {
         {
             return Color.clear;
         }
+        
         else if (color == 1)
         {
             //return Color.green.opacity(0.8);
             return Color.green;
         }
+        
         else if (color == 2)
         {
             //return Color.red.opacity(0.8);
             return Color.red;
-
         }
+        
         else
         {
             return Color.yellow
@@ -59,28 +58,29 @@ struct ManualCheckView: View {
                 Color.gray.opacity(0.15)
                     .ignoresSafeArea()
                 Text("GreenLight")
-                    .font(.custom("Futura-Bold", size: 40))
+                    .font(.custom("Futura-Bold", size: 36))
                     .foregroundColor(.green)
             }.frame(height: 45)
             ZStack{
-                background.onTapGesture {
-                    hideKeyboard()
-                }
+                background
                 Form(content: {
                     Section{
                         Text(string)
                             .font(.custom("Futura-Bold", size: 30))
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.green)
                             .padding()
                         // Text field
                         if (!reset){
                             if #available(iOS 15.0, *) {
-                                TextField("Student ID", text: $id)
+                                TextField("F00...", text: $id)
                                     .disableAutocorrection(true)
                                     .onSubmit {
                                         hideKeyboard()
                                         if(id != ""){
+                                            if(!(id.prefix(3)=="f00"||id.prefix(3)=="F00")){
+                                                id = "F00"+id
+                                            }
                                             reset = true
                                             if (socialDict.keys.contains(id.uppercased())) {
                                                 string = socialDict[id.uppercased()]!
@@ -97,7 +97,7 @@ struct ManualCheckView: View {
                                         }
                                     }
                             } else {
-                                TextField("Student ID", text: $id)
+                                TextField("F00...", text: $id)
                                     .disableAutocorrection(true)
                             }
 
@@ -106,6 +106,9 @@ struct ManualCheckView: View {
                                 hideKeyboard()
                                 
                                 if(id != ""){
+                                    if(!(id.prefix(3)=="f00"||id.prefix(3)=="F00")){
+                                        id = "F00"+id
+                                    }
                                     reset = true
                                     if (socialDict.keys.contains(id.uppercased())) {
                                         string = socialDict[id.uppercased()]!
@@ -121,7 +124,7 @@ struct ManualCheckView: View {
                                     }
                                 }
                             }
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.green)
                         }
                     }
                     if reset {
@@ -132,7 +135,7 @@ struct ManualCheckView: View {
                                 id = ""
                                 string = "Manual Check"
                             }
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.green)
                         }
                     }
                 }).padding()
