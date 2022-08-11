@@ -17,6 +17,7 @@
 		7B10FF4E28A3055F007B6F15 /* ManualCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */; };
 		7B10FF5028A30571007B6F15 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */; };
 		7B10FF5228A305B3007B6F15 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5128A305B3007B6F15 /* ListViewModel.swift */; };
+		7B10FF5628A5C1B1007B6F15 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */; };
 		7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B31E3A9288B53CB00E52A6A /* AddListView.swift */; };
 		7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */; };
 		7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB0B282C77B2005FCA5C /* ContentView.swift */; };
@@ -36,7 +37,6 @@
 		7B9936472882099100F54C0F /* GreenLightList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9936462882099100F54C0F /* GreenLightList.swift */; };
 		7B99364B28820F2D00F54C0F /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99364A28820F2D00F54C0F /* Person.swift */; };
 		7B99364F2884E64500F54C0F /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99364E2884E64400F54C0F /* Lists.swift */; };
-		7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +67,7 @@
 		7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckViewModel.swift; sourceTree = "<group>"; };
 		7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7B10FF5128A305B3007B6F15 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckView.swift; sourceTree = "<group>"; };
 		7B31E3A9288B53CB00E52A6A /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		7B39AB06282C77B2005FCA5C /* GreenLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightApp.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		7B9936462882099100F54C0F /* GreenLightList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightList.swift; sourceTree = "<group>"; };
 		7B99364A28820F2D00F54C0F /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7B99364E2884E64400F54C0F /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
-		7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,10 +122,10 @@
 			children = (
 				48C0AC65286A91D200A5D068 /* Hub */,
 				48C0AC64286A90E300A5D068 /* Scanner */,
-				7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */,
 				7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */,
 				7B39AB0B282C77B2005FCA5C /* ContentView.swift */,
 				7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */,
+				7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -373,7 +373,6 @@
 			files = (
 				7B10FF4A289EDE65007B6F15 /* AddSearchViewModel.swift in Sources */,
 				7B10FF4E28A3055F007B6F15 /* ManualCheckViewModel.swift in Sources */,
-				7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */,
 				7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */,
 				7B39AB38282C7927005FCA5C /* Names.swift in Sources */,
 				7B10FF4C28A304AD007B6F15 /* HubViewModel.swift in Sources */,
@@ -391,6 +390,7 @@
 				7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */,
 				48FB954E2886075100D1A180 /* PreviewView.swift in Sources */,
 				7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */,
+				7B10FF5628A5C1B1007B6F15 /* ManualCheckView.swift in Sources */,
 				7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */,
 				7B99364B28820F2D00F54C0F /* Person.swift in Sources */,
 				7B39AB34282C781F005FCA5C /* HubView.swift in Sources */,
