@@ -9,7 +9,8 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State var onManualCheckView = false
+    @EnvironmentObject var viewModel: ContentViewModel
+    
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }

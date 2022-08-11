@@ -35,7 +35,7 @@ class SearchDataModel {
         guard !searchTerm.isEmpty else { return nil }
         
         var components = URLComponents(string: "https://api-lookup.dartmouth.edu/v1/lookup")
-        components?.queryItems = [URLQueryItem(name: "q", value: searchTerm)]
+        components?.queryItems = [URLQueryItem(name: "q", value: searchTerm),URLQueryItem(name: "includeAlum", value: "false")]
         
         return components?.url
     }

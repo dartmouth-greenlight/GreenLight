@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class SearchViewModel: ObservableObject {
+class AddSearchViewModel: ObservableObject {
     @Published var searchTerm = ""
     @Published public private(set) var people: [SearchPersonViewModel] = []
     

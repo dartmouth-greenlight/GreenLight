@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddSearch: View {
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: AddSearchViewModel
     
     var body: some View {
         VStack {
@@ -90,6 +90,6 @@ struct SearchBar: UIViewRepresentable {
 
 struct AddSearch_Previews: PreviewProvider {
     static var previews: some View {
-        AddSearch(viewModel: SearchViewModel())
+        AddSearch(viewModel: AddSearchViewModel())
     }
 }

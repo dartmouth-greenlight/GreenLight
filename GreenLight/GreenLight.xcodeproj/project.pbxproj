@@ -12,7 +12,11 @@
 		48FB954E2886075100D1A180 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB954D2886075100D1A180 /* PreviewView.swift */; };
 		7B05BDF228769A2C00A5E5CA /* AddSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B05BDF128769A2B00A5E5CA /* AddSearch.swift */; };
 		7B10FF48289DE84E007B6F15 /* SearchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF47289DE84D007B6F15 /* SearchDataModel.swift */; };
-		7B10FF4A289EDE65007B6F15 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF49289EDE65007B6F15 /* SearchViewModel.swift */; };
+		7B10FF4A289EDE65007B6F15 /* AddSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF49289EDE65007B6F15 /* AddSearchViewModel.swift */; };
+		7B10FF4C28A304AD007B6F15 /* HubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4B28A304AD007B6F15 /* HubViewModel.swift */; };
+		7B10FF4E28A3055F007B6F15 /* ManualCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */; };
+		7B10FF5028A30571007B6F15 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */; };
+		7B10FF5228A305B3007B6F15 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5128A305B3007B6F15 /* ListViewModel.swift */; };
 		7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B31E3A9288B53CB00E52A6A /* AddListView.swift */; };
 		7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */; };
 		7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB0B282C77B2005FCA5C /* ContentView.swift */; };
@@ -31,7 +35,6 @@
 		7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB43282C7A95005FCA5C /* CameraViewController.swift */; };
 		7B9936472882099100F54C0F /* GreenLightList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9936462882099100F54C0F /* GreenLightList.swift */; };
 		7B99364B28820F2D00F54C0F /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99364A28820F2D00F54C0F /* Person.swift */; };
-		7B99364D2882183E00F54C0F /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99364C2882183E00F54C0F /* ListRow.swift */; };
 		7B99364F2884E64500F54C0F /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99364E2884E64400F54C0F /* Lists.swift */; };
 		7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */; };
 /* End PBXBuildFile section */
@@ -59,7 +62,11 @@
 		48FB954D2886075100D1A180 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		7B05BDF128769A2B00A5E5CA /* AddSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSearch.swift; sourceTree = "<group>"; };
 		7B10FF47289DE84D007B6F15 /* SearchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataModel.swift; sourceTree = "<group>"; };
-		7B10FF49289EDE65007B6F15 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		7B10FF49289EDE65007B6F15 /* AddSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSearchViewModel.swift; sourceTree = "<group>"; };
+		7B10FF4B28A304AD007B6F15 /* HubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubViewModel.swift; sourceTree = "<group>"; };
+		7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckViewModel.swift; sourceTree = "<group>"; };
+		7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		7B10FF5128A305B3007B6F15 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		7B31E3A9288B53CB00E52A6A /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		7B39AB06282C77B2005FCA5C /* GreenLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightApp.swift; sourceTree = "<group>"; };
@@ -81,7 +88,6 @@
 		7B39AB43282C7A95005FCA5C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		7B9936462882099100F54C0F /* GreenLightList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightList.swift; sourceTree = "<group>"; };
 		7B99364A28820F2D00F54C0F /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		7B99364C2882183E00F54C0F /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
 		7B99364E2884E64400F54C0F /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,10 +120,12 @@
 		48C0AC63286A90BE00A5D068 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				48C0AC65286A91D200A5D068 /* List Hub */,
+				48C0AC65286A91D200A5D068 /* Hub */,
 				48C0AC64286A90E300A5D068 /* Scanner */,
-				7B39AB0B282C77B2005FCA5C /* ContentView.swift */,
 				7BC2F4EB286AA4A5008A54A1 /* ManualCheckView.swift */,
+				7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */,
+				7B39AB0B282C77B2005FCA5C /* ContentView.swift */,
+				7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,6 +133,7 @@
 		48C0AC64286A90E300A5D068 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				48C0AC67286A920F00A5D068 /* View Controllers */,
 				48FB954D2886075100D1A180 /* PreviewView.swift */,
 				7B39AB39282C7955005FCA5C /* ScannerView.swift */,
 				7B39AB3D282C7A04005FCA5C /* StringUtils.swift */,
@@ -133,16 +142,18 @@
 			path = Scanner;
 			sourceTree = "<group>";
 		};
-		48C0AC65286A91D200A5D068 /* List Hub */ = {
+		48C0AC65286A91D200A5D068 /* Hub */ = {
 			isa = PBXGroup;
 			children = (
 				7B39AB33282C781F005FCA5C /* HubView.swift */,
+				7B10FF4B28A304AD007B6F15 /* HubViewModel.swift */,
 				7B39AB35282C7840005FCA5C /* ListView.swift */,
+				7B10FF5128A305B3007B6F15 /* ListViewModel.swift */,
 				7B05BDF128769A2B00A5E5CA /* AddSearch.swift */,
-				7B99364C2882183E00F54C0F /* ListRow.swift */,
+				7B10FF49289EDE65007B6F15 /* AddSearchViewModel.swift */,
 				7B31E3A9288B53CB00E52A6A /* AddListView.swift */,
 			);
-			path = "List Hub";
+			path = Hub;
 			sourceTree = "<group>";
 		};
 		48C0AC67286A920F00A5D068 /* View Controllers */ = {
@@ -152,15 +163,6 @@
 				7B39AB41282C7A68005FCA5C /* VisionViewController.swift */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		48C0AC69286A927900A5D068 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				7B39AB37282C7927005FCA5C /* Names.swift */,
-				7B99364E2884E64400F54C0F /* Lists.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		7B39AAFD282C77B2005FCA5C = {
@@ -186,12 +188,10 @@
 		7B39AB08282C77B2005FCA5C /* GreenLight */ = {
 			isa = PBXGroup;
 			children = (
-				7BE6114E288F7C2700AF1F3A /* ViewModels */,
 				7BE6114D288F7C1800AF1F3A /* Models */,
-				48C0AC69286A927900A5D068 /* Data */,
-				48C0AC67286A920F00A5D068 /* View Controllers */,
 				48C0AC63286A90BE00A5D068 /* Views */,
 				7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */,
+				48C0AC61286A839800A5D068 /* LookupAPIs.swift */,
 				7B39AB0D282C77B7005FCA5C /* Assets.xcassets */,
 				7B39AB0F282C77B7005FCA5C /* Preview Content */,
 			);
@@ -230,17 +230,10 @@
 				7B9936462882099100F54C0F /* GreenLightList.swift */,
 				7B99364A28820F2D00F54C0F /* Person.swift */,
 				48BEE511288E321200D5A08A /* Property.swift */,
+				7B39AB37282C7927005FCA5C /* Names.swift */,
+				7B99364E2884E64400F54C0F /* Lists.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		7BE6114E288F7C2700AF1F3A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				48C0AC61286A839800A5D068 /* LookupAPIs.swift */,
-				7B10FF49289EDE65007B6F15 /* SearchViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,25 +371,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B10FF4A289EDE65007B6F15 /* SearchViewModel.swift in Sources */,
+				7B10FF4A289EDE65007B6F15 /* AddSearchViewModel.swift in Sources */,
+				7B10FF4E28A3055F007B6F15 /* ManualCheckViewModel.swift in Sources */,
 				7BC2F4EC286AA4A5008A54A1 /* ManualCheckView.swift in Sources */,
 				7B39AB44282C7A95005FCA5C /* CameraViewController.swift in Sources */,
 				7B39AB38282C7927005FCA5C /* Names.swift in Sources */,
+				7B10FF4C28A304AD007B6F15 /* HubViewModel.swift in Sources */,
 				48C0AC62286A839800A5D068 /* LookupAPIs.swift in Sources */,
 				7B39AB3C282C798D005FCA5C /* CameraView.swift in Sources */,
+				7B10FF5028A30571007B6F15 /* ContentViewModel.swift in Sources */,
 				7B05BDF228769A2C00A5E5CA /* AddSearch.swift in Sources */,
 				7B39AB36282C7840005FCA5C /* ListView.swift in Sources */,
 				7B9936472882099100F54C0F /* GreenLightList.swift in Sources */,
 				7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */,
 				7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */,
 				48BEE512288E321200D5A08A /* Property.swift in Sources */,
+				7B10FF5228A305B3007B6F15 /* ListViewModel.swift in Sources */,
 				7B39AB3E282C7A04005FCA5C /* StringUtils.swift in Sources */,
 				7B39AB3A282C7955005FCA5C /* ScannerView.swift in Sources */,
 				48FB954E2886075100D1A180 /* PreviewView.swift in Sources */,
 				7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */,
 				7B39AB42282C7A68005FCA5C /* VisionViewController.swift in Sources */,
 				7B99364B28820F2D00F54C0F /* Person.swift in Sources */,
-				7B99364D2882183E00F54C0F /* ListRow.swift in Sources */,
 				7B39AB34282C781F005FCA5C /* HubView.swift in Sources */,
 				7B99364F2884E64500F54C0F /* Lists.swift in Sources */,
 				7B10FF48289DE84E007B6F15 /* SearchDataModel.swift in Sources */,
