@@ -75,7 +75,7 @@ func getName(id: String) -> String {
     return user
 }
 
-//TODO: If no names are returned, search for person's last name. If nothing returned, search for first name. If nothing returned, exit.
+//TODO: Separate fetching data from the processing data
 func getID(name: String, searchNum: Int? = 1) -> [Person]{
     let original = name
     //Building URL
