@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct GreenLightApp: App {
+    
+    @StateObject var contentViewModel: ContentViewModel = ContentViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(Lists())
+                .environmentObject(contentViewModel)
         }
     }
 }

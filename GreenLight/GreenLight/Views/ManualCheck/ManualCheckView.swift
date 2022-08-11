@@ -16,30 +16,37 @@ extension View {
 //TODO: fix bugginess when viewing in horizontal
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
+    init(){
+        UITableView.appearance().backgroundColor = .systemGroupedBackground
+        }
     
     @State var id: String = ""
     @State var color: Int = 0
     @State var reset: Bool = false
     @State var string: String = "Manual Check"
+    @Environment(\.colorScheme) var colorScheme
     
     var backgroundColor: Color{
         if(color == 0)
         {
-            return Color.clear;
+            if (colorScheme == .light) {
+                return Color(UIColor.secondarySystemBackground);
+            }
+            else {
+                return Color(.black)
+            }
         }
-        
         else if (color == 1)
         {
             //return Color.green.opacity(0.8);
             return Color.green;
         }
-        
         else if (color == 2)
         {
             //return Color.red.opacity(0.8);
             return Color.red;
+
         }
-        
         else
         {
             return Color.yellow
@@ -55,32 +62,29 @@ struct ManualCheckView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.gray.opacity(0.15)
-                    .ignoresSafeArea()
                 Text("GreenLight")
-                    .font(.custom("Futura-Bold", size: 36))
+                    .font(.custom("Futura-Bold", size: 30))
                     .foregroundColor(.green)
             }.frame(height: 45)
             ZStack{
-                background
+                background.onTapGesture {
+                    hideKeyboard()
+                }
                 Form(content: {
                     Section{
                         Text(string)
-                            .font(.custom("Futura-Bold", size: 30))
+                            .font(.custom("Futura-Bold", size: 20))
+                            .foregroundColor(.green)
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(Color.green)
                             .padding()
                         // Text field
                         if (!reset){
                             if #available(iOS 15.0, *) {
-                                TextField("F00...", text: $id)
+                                TextField("Student ID", text: $id)
                                     .disableAutocorrection(true)
                                     .onSubmit {
                                         hideKeyboard()
                                         if(id != ""){
-                                            if(!(id.prefix(3)=="f00"||id.prefix(3)=="F00")){
-                                                id = "F00"+id
-                                            }
                                             reset = true
                                             if (socialDict.keys.contains(id.uppercased())) {
                                                 string = socialDict[id.uppercased()]!
@@ -97,7 +101,7 @@ struct ManualCheckView: View {
                                         }
                                     }
                             } else {
-                                TextField("F00...", text: $id)
+                                TextField("Student ID", text: $id)
                                     .disableAutocorrection(true)
                             }
 
@@ -106,12 +110,9 @@ struct ManualCheckView: View {
                                 hideKeyboard()
                                 
                                 if(id != ""){
-                                    if(!(id.prefix(3)=="f00"||id.prefix(3)=="F00")){
-                                        id = "F00"+id
-                                    }
                                     reset = true
-                                    if (socialDict.keys.contains(id.uppercased())) {
-                                        string = socialDict[id.uppercased()]!
+                                    if (betapalooza.keys.contains(id.uppercased())) {
+                                        string = betapalooza[id.uppercased()]!
                                         color = 1
                                     }
                                     else if (blackDict.keys.contains(id.uppercased())){
@@ -124,7 +125,6 @@ struct ManualCheckView: View {
                                     }
                                 }
                             }
-                            .foregroundColor(Color.green)
                         }
                     }
                     if reset {
@@ -135,7 +135,6 @@ struct ManualCheckView: View {
                                 id = ""
                                 string = "Manual Check"
                             }
-                            .foregroundColor(Color.green)
                         }
                     }
                 }).padding()

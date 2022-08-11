@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct ListView: View {
-    @State private var editMode = EditMode.inactive
-    @State var names: [Person]
-    var title: String
+    @ObservedObject var viewModel: ListViewModel
     
     init(title: String, names: [Person]) {
-        self.title = title
-        _names = State<[Person]>(initialValue: names)
+        self.viewModel = ListViewModel(title: title, names: names)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.green]
@@ -22,7 +19,7 @@ struct ListView: View {
     }
     var body: some View {
         List() {
-            ForEach(names, id: \.name) { name in
+            ForEach(viewModel.names, id: \.name) { name in
                 VStack(alignment: .leading, spacing: 5){
                     Text(name.name)
                         .fontWeight(.semibold)
@@ -30,14 +27,11 @@ struct ListView: View {
                         .font(.subheadline)
                 }
             }
-            .onDelete(perform: onDeletePress)
+            .onDelete(perform: viewModel.onDeletePress)
         }
-        .navigationTitle(title)
+        .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.large)
         .navigationBarItems(trailing: EditButton())
-    }
-    private func onDeletePress(offsets: IndexSet) {
-        names.remove(atOffsets: offsets)
     }
 }
 

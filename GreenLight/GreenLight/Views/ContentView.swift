@@ -9,7 +9,8 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-    @State var onManualCheckView = false
+    @EnvironmentObject var viewModel: ContentViewModel
+    
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
@@ -52,12 +53,12 @@ struct ContentView: View {
                 }
             HubView()
                 .tabItem() {
-                    Image(systemName: "list.bullet.rectangle.fill").renderingMode(.template)
+                    Image(systemName: "list.bullet").renderingMode(.template)
                     //Text("Lists")
                 }
             ManualCheckView()
                 .tabItem() {
-                    Image(systemName: "person.text.rectangle").renderingMode(.template)
+                    Image(systemName: "person.crop.circle.badge.checkmark").renderingMode(.template)
                     //Text("Manual Check")
                 }
         }.accentColor(.green)
