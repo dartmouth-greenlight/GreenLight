@@ -10,9 +10,7 @@ import SwiftUI
 //TODO: fix bugginess when viewing in horizontal
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
-    init(){
-        UITableView.appearance().backgroundColor = .systemGroupedBackground
-        }
+    @ObservedObject var viewModel: ManualCheckViewModel
     
     @State var id: String = ""
     @State var color: Int = 0
@@ -20,94 +18,61 @@ struct ManualCheckView: View {
     @State var string: String = "Manual Check"
     @Environment(\.colorScheme) var colorScheme
     
-    var backgroundColor: Color{
-        if(color == 0)
-        {
-            if (colorScheme == .light) {
-                return Color(UIColor.secondarySystemBackground);
-            }
-            else {
-                return Color(.black)
-            }
-        }
-        else if (color == 1)
-        {
-            //return Color.green.opacity(0.8);
-            return Color.green;
-        }
-        else if (color == 2)
-        {
-            //return Color.red.opacity(0.8);
-            return Color.red;
-
-        }
-        else
-        {
-            return Color.yellow
-            //return Color.yellow.opacity(0.8);
-        }
-    }
     var body: some View {
         VStack{
+            banner
             ZStack{
-                Text("GreenLight")
-                    .font(.custom("Futura-Bold", size: 30))
-                    .foregroundColor(.green)
-            }.frame(height: 45)
-            ZStack{
-                backgroundColor
+                viewModel.backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                Form(content: {
+                //TODO: ? replace this with a rounded rectangle z-stack v-stack so it doesn't take up the whole page
+                Form {
                     Section{
-                        Text(string)
-                            .font(.custom("Futura-Bold", size: 20))
-                            .foregroundColor(.green)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding()
+                        nameOrManualCheck
                         // Text field
-                        if (!reset){
-                            TextField("Student ID", text: $id)
+                        if (!viewModel.reset){
+                            TextField("Student ID", text: $viewModel.id)
                             
                             // Button
                             Button("Check") {
-                                
-                                if(id != ""){
-                                    reset = true
-                                    if (betapalooza.keys.contains(id.uppercased())) {
-                                        string = betapalooza[id.uppercased()]!
-                                        color = 1
-                                    }
-                                    else if (blackDict.keys.contains(id.uppercased())){
-                                        string = blackDict[id.uppercased()]!
-                                        color = 2
-                                    }
-                                    else {
-                                        string = getName(id: id)
-                                        color = 3
-                                    }
-                                }
+                                viewModel.checkID(stuID: viewModel.id)
                             }
                         }
                     }
-                    if reset {
+                    if viewModel.reset {
                         Section {
                             Button("Check Another ID") {
-                                color = 0
-                                reset = false
-                                id = ""
-                                string = "Manual Check"
+                                viewModel.resetVars()
                             }
                         }
                     }
-                }).padding()
+                }
+                .padding(.all)
             }
         }
     }
+    
+    var banner: some View{
+        ZStack{
+            Text("GreenLight")
+                .font(.custom("Futura-Bold", size: 30))
+                .foregroundColor(.green)
+        }.frame(height: 45)
+    }
+    
+    var nameOrManualCheck: some View{
+        Text(viewModel.bannerTitle)
+            .font(.custom("Futura-Bold", size: 20))
+            .foregroundColor(.green)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding()
+    }
 }
+
 
 struct ManualCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        ManualCheckView()
+        let manCheckVM2 = ManualCheckViewModel()
+        ManualCheckView(viewModel: manCheckVM2)
     }
 }
 
