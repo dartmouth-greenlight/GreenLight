@@ -25,7 +25,7 @@ struct HubView: View {
             List() {
                 ForEach(contentViewModel.lists) { list in
                     NavigationLink {
-                        ListView(title: list.name, names: list.list)
+                        ListView(list: list)
                     } label: {
                         ListRow(list: list)
                     }
@@ -35,25 +35,38 @@ struct HubView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("Lists")
             .navigationBarTitleDisplayMode(.large)
-            .navigationBarItems(leading: addButtonPress, trailing: EditButton())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if !viewModel.isEditing {
+                        Button(action: viewModel.onAddPress) { Image(systemName: "plus") }
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.isEditing.toggle()
+                    }) {
+                        if viewModel.isEditing {
+                            Text("Done")
+                        } else {
+                            Text("Edit")
+                        }
+                    }
+                }
+            }
         }
         .sheet(isPresented: $viewModel.showView) {
-            AddSearch(viewModel: AddSearchViewModel())
+            if #available(iOS 15.0, *) {
+                AddListView(viewModel: AddListViewModel())
+            }
+            else {
+                AddListViewDepreciated(viewModel: AddListViewModel())
+            }
         }
     }
     
     private func deleteButtonPress(offsets: IndexSet) {
         viewModel.onDeletePress(offsets: offsets, viewModel: contentViewModel)
     }
-    
-    private var addButtonPress: some View {
-        switch viewModel.editMode {
-            case .inactive:
-            return AnyView(Button(action: viewModel.onAddPress) { Image(systemName: "plus") })
-            default:
-                return AnyView(EmptyView())
-            }
-        }
 }
 
 struct ListRow: View {

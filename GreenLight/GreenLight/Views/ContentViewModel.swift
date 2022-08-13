@@ -13,4 +13,10 @@ class ContentViewModel: ObservableObject {
                                               GreenLightList(name: "Black List", list: blackList),
                                               GreenLightList(name: "Beta", list: beta)]
     @Published var onManualCheckView = false
+    
+    func addToList(list: GreenLightList, person: Person) {
+        if let index = self.lists.firstIndex(where: { $0.id == list.id }) {
+            self.lists[index].addToList(person: person)
+        }
+    }
 }

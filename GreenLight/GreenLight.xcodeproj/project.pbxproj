@@ -18,6 +18,7 @@
 		7B10FF5028A30571007B6F15 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */; };
 		7B10FF5228A305B3007B6F15 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5128A305B3007B6F15 /* ListViewModel.swift */; };
 		7B10FF5628A5C1B1007B6F15 /* ManualCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */; };
+		7B10FF5828A6DB93007B6F15 /* AddListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10FF5728A6DB92007B6F15 /* AddListViewModel.swift */; };
 		7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B31E3A9288B53CB00E52A6A /* AddListView.swift */; };
 		7B39AB0A282C77B2005FCA5C /* GreenLightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */; };
 		7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B39AB0B282C77B2005FCA5C /* ContentView.swift */; };
@@ -68,6 +69,7 @@
 		7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7B10FF5128A305B3007B6F15 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCheckView.swift; sourceTree = "<group>"; };
+		7B10FF5728A6DB92007B6F15 /* AddListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewModel.swift; sourceTree = "<group>"; };
 		7B31E3A9288B53CB00E52A6A /* AddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListView.swift; sourceTree = "<group>"; };
 		7B39AB06282C77B2005FCA5C /* GreenLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B39AB09282C77B2005FCA5C /* GreenLightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenLightApp.swift; sourceTree = "<group>"; };
@@ -123,9 +125,9 @@
 				48C0AC65286A91D200A5D068 /* Hub */,
 				48C0AC64286A90E300A5D068 /* Scanner */,
 				7B10FF4D28A3055F007B6F15 /* ManualCheckViewModel.swift */,
+				7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */,
 				7B39AB0B282C77B2005FCA5C /* ContentView.swift */,
 				7B10FF4F28A30571007B6F15 /* ContentViewModel.swift */,
-				7B10FF5528A5C1B1007B6F15 /* ManualCheckView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +154,7 @@
 				7B05BDF128769A2B00A5E5CA /* AddSearch.swift */,
 				7B10FF49289EDE65007B6F15 /* AddSearchViewModel.swift */,
 				7B31E3A9288B53CB00E52A6A /* AddListView.swift */,
+				7B10FF5728A6DB92007B6F15 /* AddListViewModel.swift */,
 			);
 			path = Hub;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				7B10FF5028A30571007B6F15 /* ContentViewModel.swift in Sources */,
 				7B05BDF228769A2C00A5E5CA /* AddSearch.swift in Sources */,
 				7B39AB36282C7840005FCA5C /* ListView.swift in Sources */,
+				7B10FF5828A6DB93007B6F15 /* AddListViewModel.swift in Sources */,
 				7B9936472882099100F54C0F /* GreenLightList.swift in Sources */,
 				7B39AB0C282C77B2005FCA5C /* ContentView.swift in Sources */,
 				7B31E3AA288B53CB00E52A6A /* AddListView.swift in Sources */,
