@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddSearch: View {
     @ObservedObject var viewModel: AddSearchViewModel
+    @ObservedObject var listViewModel: ListViewModel
+    @EnvironmentObject var contentViewModel: ContentViewModel
     
     var body: some View {
         VStack {
@@ -18,7 +20,7 @@ struct AddSearch: View {
                 EmptySearch()
             } else {
                 List(viewModel.people) { person in
-                    SearchedPersonView(person: person)
+                    SearchedPersonView(person: person, listViewModel: listViewModel)
                 }
                 .listStyle(PlainListStyle())
             }
@@ -28,6 +30,9 @@ struct AddSearch: View {
 
 struct SearchedPersonView: View {
     @ObservedObject var person: SearchPersonViewModel
+    @ObservedObject var listViewModel: ListViewModel
+    @EnvironmentObject var contentViewModel: ContentViewModel
+    
     var body: some View {
         HStack{
             VStack(alignment: .leading) {
@@ -36,6 +41,17 @@ struct SearchedPersonView: View {
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
+            Spacer()
+            Button(action: {
+                if(!person.added){
+                    person.icon = "checkmark.circle.fill"
+                    person.addToList(list: listViewModel.list, person: person, contentViewModel: contentViewModel)
+                }
+                print("pressed")
+            }, label: {
+                Image(systemName:person.icon).resizable().frame(width: 20, height: 20).foregroundColor(.green)
+            })
+            .buttonStyle(BorderlessButtonStyle())
         }
         .padding()
     }
@@ -85,11 +101,5 @@ struct SearchBar: UIViewRepresentable {
             searchTerm = searchBar.text ?? ""
             UIApplication.shared.windows.first { $0.isKeyWindow }?.endEditing(true)
         }
-    }
-}
-
-struct AddSearch_Previews: PreviewProvider {
-    static var previews: some View {
-        AddSearch(viewModel: AddSearchViewModel())
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class HubViewModel: ObservableObject {
-    @Published var editMode = EditMode.inactive
+    @Published var isEditing = false
     @Published var showView = false
     
     func onDeletePress(offsets: IndexSet, viewModel: ContentViewModel) {

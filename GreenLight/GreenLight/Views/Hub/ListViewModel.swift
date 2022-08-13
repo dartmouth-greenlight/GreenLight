@@ -9,16 +9,21 @@ import Foundation
 import SwiftUI
 
 class ListViewModel: ObservableObject {
-    @Published var editMode = EditMode.inactive
-    @Published var names: [Person]
+    @Published var isEditing = false
+    @Published var showView = false
+    @Published var list: GreenLightList
     @Published var title: String
     
-    init(title: String, names: [Person]) {
-        self.title = title
-        self.names = names
+    init(list: GreenLightList) {
+        self.title = list.name
+        self.list = list
     }
     
     func onDeletePress(offsets: IndexSet) {
-        self.names.remove(atOffsets: offsets)
+        self.list.list.remove(atOffsets: offsets)
+    }
+    
+    func onAddPress() {
+        showView.toggle()
     }
 }
