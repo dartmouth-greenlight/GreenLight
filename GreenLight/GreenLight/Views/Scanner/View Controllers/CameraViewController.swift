@@ -377,10 +377,10 @@ class CameraViewController: UIViewController {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
                 // Green case:
-                if(betapalooza[string] != nil){
+                if(socialDict[string] != nil){
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.8))
-                    self.idView.text = betapalooza[string]
+                    self.idView.text = socialDict[string]
                 }
                 // Red case:
                 else if(blackDict[string] != nil){

@@ -10,6 +10,7 @@ import AVFoundation
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: ContentViewModel
+    let manCheckVM = ManualCheckViewModel()
     
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
@@ -56,7 +57,7 @@ struct ContentView: View {
                     Image(systemName: "list.bullet").renderingMode(.template)
                     //Text("Lists")
                 }
-            ManualCheckView()
+            ManualCheckView(viewModel: manCheckVM)
                 .tabItem() {
                     Image(systemName: "person.crop.circle.badge.checkmark").renderingMode(.template)
                     //Text("Manual Check")
