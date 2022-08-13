@@ -56,10 +56,19 @@ class SearchPersonViewModel: Identifiable, ObservableObject {
     let id: String
     let name: String
     let year: String
+    @Published var added: Bool
+    @Published var icon: String
     
     init(name: String, id: String, year: String) {
         self.id = id
         self.name = name
         self.year = year
+        self.added = false
+        self.icon = "plus.circle.fill"
+    }
+    
+    
+    func addToList(list: GreenLightList, person: SearchPersonViewModel, contentViewModel: ContentViewModel) {
+        contentViewModel.addToList(list: list, person: Person(name: person.name, id: person.id, year: person.year))
     }
 }

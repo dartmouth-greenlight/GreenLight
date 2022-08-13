@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ListView: View {
     @ObservedObject var viewModel: ListViewModel
+    @EnvironmentObject var contentViewModel: ContentViewModel
     
-    init(title: String, names: [Person]) {
-        self.viewModel = ListViewModel(title: title, names: names)
+    init(list: GreenLightList) {
+        self.viewModel = ListViewModel(list: list)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.green]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.green]
@@ -19,7 +20,7 @@ struct ListView: View {
     }
     var body: some View {
         List() {
-            ForEach(viewModel.names, id: \.name) { name in
+            ForEach(viewModel.list.list, id: \.name) { name in
                 VStack(alignment: .leading, spacing: 5){
                     Text(name.name)
                         .fontWeight(.semibold)
@@ -31,12 +32,33 @@ struct ListView: View {
         }
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.large)
-        .navigationBarItems(trailing: EditButton())
+        .navigationBarBackButtonHidden(viewModel.isEditing)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if viewModel.isEditing {
+                    Button(action: viewModel.onAddPress) { Image(systemName: "plus") }
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    viewModel.isEditing.toggle()
+                }) {
+                    if viewModel.isEditing {
+                        Text("Done")
+                    } else {
+                        Text("Edit")
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $viewModel.showView) {
+            AddSearch(viewModel: AddSearchViewModel(), listViewModel: viewModel)
+        }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(title: "Black List", names: blackList)
+        ListView(list: GreenLightList(name: "blacklist", list: blackList))
     }
 }

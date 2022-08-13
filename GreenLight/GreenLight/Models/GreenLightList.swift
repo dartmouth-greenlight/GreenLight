@@ -12,5 +12,8 @@ struct GreenLightList: Identifiable {
     let id = NSDate().timeIntervalSince1970
     var name: String
     var list: Array<Person>
-    //var dict: [String : String]
+    
+    mutating func addToList(person: Person) {
+        self.list.append(person)
+    }
 }
