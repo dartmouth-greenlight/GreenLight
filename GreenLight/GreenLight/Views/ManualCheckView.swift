@@ -7,15 +7,10 @@
 
 import SwiftUI
 
-//TODO: fix bugginess when viewing in horizontal
 //TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
 struct ManualCheckView: View {
     @ObservedObject var viewModel: ManualCheckViewModel
     
-    @State var id: String = ""
-    @State var color: Int = 0
-    @State var reset: Bool = false
-    @State var string: String = "Manual Check"
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -24,7 +19,6 @@ struct ManualCheckView: View {
             ZStack{
                 viewModel.backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                //TODO: ? replace this with a rounded rectangle z-stack v-stack so it doesn't take up the whole page
                 Form {
                     Section{
                         nameOrManualCheck
@@ -46,7 +40,6 @@ struct ManualCheckView: View {
                         }
                     }
                 }
-                .padding(.all)
             }
         }
     }
@@ -73,6 +66,7 @@ struct ManualCheckView_Previews: PreviewProvider {
     static var previews: some View {
         let manCheckVM2 = ManualCheckViewModel()
         ManualCheckView(viewModel: manCheckVM2)
+            .preferredColorScheme(.dark)
     }
 }
 
