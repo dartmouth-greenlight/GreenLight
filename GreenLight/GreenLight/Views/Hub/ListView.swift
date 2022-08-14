@@ -52,13 +52,13 @@ struct ListView: View {
             }
         }
         .sheet(isPresented: $viewModel.showView) {
-            AddSearch(viewModel: AddSearchViewModel(), listViewModel: viewModel)
+            AddSearch(viewModel: AddSearchViewModel(list: viewModel.list), listViewModel: viewModel)
         }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(list: GreenLightList(name: "blacklist", list: blackList))
+        ListView(list: GreenLightList(name: "blacklist", list: blackList, dict: demoBlackList))
     }
 }

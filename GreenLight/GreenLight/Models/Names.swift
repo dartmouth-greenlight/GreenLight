@@ -53,28 +53,6 @@ class ListOfNames : Equatable {
     
 }
 
-//struct InviteList {
-//    //var listList = [ListOfNames()]
-//
-//    init(listOfLists: [ListOfNames]){
-//        listList = listOfLists
-//    }
-//
-//    func removeList(rem: ListOfNames){
-//        let index = listList.firstIndex(of: rem)
-//        if(index != nil){
-//            //listList.remove(at: index!)
-//        }
-//    }
-//}
-
-
-let blackList =
-[Person(name: "Tucker Simpson", id: "F004H39", year: "24")]
-let socialList =
-[Person(name:"Jackson Desmond" , id: "F004HBW", year: "24")]
-let beta = [Person(name:"Jackson Desmond" , id: "F004HBW", year: "24"), Person(name:"Henry Exall" , id: "F004DPR", year: "24")]
-
 
 let kkg = ["F004GG9" : "Abbey Savin",
            "F004H7F" : "Agatha la Voie",
@@ -176,6 +154,17 @@ let APhi = ["F0044T8" : "Eden Schneck",
         ]
 
 
+let blackList =
+    [Person(name: "Tucker Simpson", id: "F004H39", year: "24")]
+
+let socialList =
+    [Person(name:"Jackson Desmond" , id: "F004HBW", year: "24"),
+    Person(name:"Katherine L. Levy" , id: "F004H1H", year: "24"),
+    Person(name: "Daniel J. Locascio", id: "F004GZY", year: "24"),
+    Person(name: "Caroline B. Kramer", id: "F004Y2W", year: "24"),
+    Person(name: "Isabelle B. Lewitt", id: "F004Q8X", year: "24")]
+
+
 
 let demoDict = ["F004HBW" : "Jackson Desmond",
                 "F004H1H" : "Katherine L. Levy",
@@ -186,16 +175,6 @@ let demoDict = ["F004HBW" : "Jackson Desmond",
 
 let demoBlackList = ["F004H39" : "Tucker Simpson"]
 
+let blackDict = demoBlackList
+
 let socialDict = demoDict
-
-let blackDict = ["F003Y2H" : "Jaime Chiudian",
-                 "F00448K" : "Brody Karton",
-                 "F00424N" : "Darren Nelson",
-                 "F003KQN" : "Sean Kim",
-                 "F003XCK" : "Skye Henderson",
-                 "F005GDC" : "Jack Cocchiarella",
-                 "F004TWS" : "Grady Bohen",
-                 "F004GCQ" : "Jovani Orta",
-                 "F0055N7" : "Mccoy Buchsteiner",
-                 "F004H1V" : "Taka Khoo"]
-

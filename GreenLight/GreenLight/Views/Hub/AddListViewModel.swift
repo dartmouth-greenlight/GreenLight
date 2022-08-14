@@ -14,7 +14,7 @@ class AddListViewModel: ObservableObject {
     
     func createList(contentViewModel: ContentViewModel) {
         if self.name != "" {
-            contentViewModel.lists.append(GreenLightList(name: self.name, list: []))
+            contentViewModel.addList(name: name)
         }
     }
 }

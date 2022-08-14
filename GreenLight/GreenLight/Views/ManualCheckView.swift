@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//TODO: Switch the input name box with a box that display's the person's name -- make sure doorman didn't have a typo
+
 struct ManualCheckView: View {
     @ObservedObject var viewModel: ManualCheckViewModel
     
@@ -19,31 +19,18 @@ struct ManualCheckView: View {
             ZStack{
                 viewModel.backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                Form {
-                    Section{
-                        nameOrManualCheck
-                        // Text field
-                        if (!viewModel.reset){
-                            TextField("Student ID", text: $viewModel.id)
-                            
-                            // Button
-                            Button("Check") {
-                                viewModel.checkID(stuID: viewModel.id)
-                            }
-                        }
+                    .onTapGesture {
+                        hideKeyboard()
                     }
-                    if viewModel.reset {
-                        Section {
-                            Button("Check Another ID") {
-                                viewModel.resetVars()
-                            }
-                        }
-                    }
+                VStack{
+                    checkerBox
+                        .frame(width: 350, height: 200, alignment: .top)
+                        .padding(.top, 30.0)
+                    Spacer()
                 }
             }
         }
     }
-    
     var banner: some View{
         ZStack{
             Text("GreenLight")
@@ -54,10 +41,45 @@ struct ManualCheckView: View {
     
     var nameOrManualCheck: some View{
         Text(viewModel.bannerTitle)
-            .font(.custom("Futura-Bold", size: 20))
+            .font(.custom("Futura-Bold", size: 30))
             .foregroundColor(.green)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding()
+    }
+    
+    var checkerBox: some View{
+        ZStack{
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .colorInvert()
+            VStack{
+                nameOrManualCheck
+                if (!viewModel.reset){
+                    TextField("Student ID", text: $viewModel.id)
+                        .padding(10.0)
+                        .background(Color(UIColor.systemGray))
+                        .padding(.horizontal)
+                    
+                    // Button
+                    Button("Check") {
+                        viewModel.checkID(stuID: viewModel.id)
+                    }.buttonStyle(RoundedRectangleButtonStyle())
+                        .padding(.horizontal, 30.0)
+                }else{
+                    Button("Check Another ID") {
+                        viewModel.resetVars()
+                    }.buttonStyle(RoundedRectangleButtonStyle())
+                        .padding(.horizontal, 30.0)
+                }
+            }
+        }
+    }
+}
+
+
+extension View {
+    func hideKeyboard() {
+        let resign = #selector(UIResponder.resignFirstResponder)
+        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 

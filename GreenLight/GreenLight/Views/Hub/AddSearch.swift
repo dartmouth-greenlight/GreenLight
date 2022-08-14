@@ -36,18 +36,16 @@ struct SearchedPersonView: View {
     var body: some View {
         HStack{
             VStack(alignment: .leading) {
-                Text(person.name)
-                Text(person.id)
-                    .font(.footnote)
-                    .foregroundColor(.gray)
+                Text(person.name + " '" + person.year)
+//                Text("'" + person.year)
+//                    .font(.footnote)
+//                    .foregroundColor(.gray)
             }
             Spacer()
             Button(action: {
                 if(!person.added){
-                    person.icon = "checkmark.circle.fill"
                     person.addToList(list: listViewModel.list, person: person, contentViewModel: contentViewModel)
                 }
-                print("pressed")
             }, label: {
                 Image(systemName:person.icon).resizable().frame(width: 20, height: 20).foregroundColor(.green)
             })
