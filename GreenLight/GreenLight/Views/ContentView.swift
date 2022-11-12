@@ -37,6 +37,11 @@ struct ContentView: View {
     var body: some View {
         TabView{
             //got rid of text under buttons -- there are only 3 tabs and they are always there, users will remember what they connect to
+            HubView()
+                .tabItem() {
+                    Image(systemName: "list.bullet").renderingMode(.template)
+                    //Text("Lists")
+                }
             ScannerView()
                 .tabItem() {
                     Image(systemName: "camera.viewfinder").renderingMode(.template)
@@ -51,11 +56,6 @@ struct ContentView: View {
                         Property.sharedInstance.flashOn = true
                         toggleFlash()
                     }
-                }
-            HubView()
-                .tabItem() {
-                    Image(systemName: "list.bullet").renderingMode(.template)
-                    //Text("Lists")
                 }
             ManualCheckView(viewModel: manCheckVM)
                 .tabItem() {
