@@ -11,30 +11,25 @@ import Foundation
 //TODO: Make more robust for typos, nicknames, common names, etc.
 
 // sections of the json object the api returns
+
 struct IDLookUp: Decodable {
     let truncated: Bool
-    let users: [User]
+    let users: [Student]
 }
-
-//struct User: Decodable {
-    //let uid : String
-    //let mail: Optional<String>
-    //let eduPersonPrimaryAffiliation: String
-   // let displayName: String
-//}
 
 enum MyError: Error {
     case runtimeError(String)
 }
 
+
 func getName(id: String) -> String {
     //Building URL
     let studentID = id
-    var user = ""
+    var student = ""
     if(studentID.prefix(3)=="f00" || studentID.prefix(3)=="F00"){
         let resourceString = "https://api-lookup.dartmouth.edu/v1/lookup?q=\(studentID)"
         let resourceURL = URL(string: resourceString)
-        guard resourceURL != nil else {return "Name not found."}
+        guard resourceURL != nil else {return "Name not found"}
         
         let semaphore = DispatchSemaphore(value: 0)  //1. create a counting semaphore
         
@@ -50,12 +45,12 @@ func getName(id: String) -> String {
 
                 do {
                     let idlookup = try decoder.decode(IDLookUp.self, from: data!)
-                    let users = idlookup.users
-                    if(users.isEmpty){
-                        user = "No name found."
+                    let students = idlookup.users
+                    if(students.isEmpty){
+                        student = "No name found"
                         semaphore.signal() // 2. Count it up if no name found
                     }else{
-                        user = users[0].displayName
+                        student = students[0].displayName
                         semaphore.signal()  //2. Count it up
                     }
 
@@ -69,10 +64,10 @@ func getName(id: String) -> String {
         
         semaphore.wait()    // 3. Wait for semaphore
     }else{
-        user = "Name not found."
+        student = "Name not found"
     }
     
-    return user
+    return student
 }
 
 //TODO: Separate fetching data from the processing data
@@ -122,16 +117,16 @@ func getID(name: String, searchNum: Int? = 1) -> [Person]{
 
             do {
                 let idlookup = try decoder.decode(IDLookUp.self, from: data!)
-                let users = idlookup.users
-                if(users.isEmpty){
+                let students = idlookup.users
+                if(students.isEmpty){
                     semaphore.signal() // 2. Count it up if no name found
                 }else{
-                    for user in users{
-                        if(user.uid.prefix(3)=="f00") {
-                            if(user.mail !=  nil){
+                    for student in students{
+                        if(student.uid.prefix(3)=="f00") {
+                            if(student.mail !=  nil){
                                 
                                 // Get class year from email
-                                let yearPieces = user.mail!.split(separator: "@")
+                                let yearPieces = student.mail!.split(separator: "@")
                                 let twoDigYear = yearPieces[0].split(separator: ".")
                                 var currYear = ""
                                 currYear += twoDigYear.last!
@@ -139,7 +134,7 @@ func getID(name: String, searchNum: Int? = 1) -> [Person]{
                                 //toggle this to include / exclude grad students/older alums
                                 if(currYear.prefix(1) == "2"){
                                     if(currYear.prefix(2) == "22" || currYear.prefix(2) == "23" || currYear.prefix(2) == "24" || currYear.prefix(2) == "25" || currYear.prefix(2) == "26") {
-                                        let curr = Person(name: user.displayName, id: user.uid, year: currYear)
+                                        let curr = Person(name: student.displayName, id: student.uid, year: currYear)
                                         names.append(curr)
                                     }
                                 }

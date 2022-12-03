@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct GreenLightApp: App {
+    @StateObject var contentViewModel = ContentViewModel()
+    @StateObject var authViewModel = AuthViewModel()
     
-    @StateObject var contentViewModel: ContentViewModel = ContentViewModel()
+    init() {
+        FirebaseApp.configure()
+    }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(contentViewModel)
+            .environmentObject(contentViewModel)
+            .environmentObject(authViewModel)
         }
     }
 }

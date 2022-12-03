@@ -43,11 +43,10 @@ struct SearchedPersonView: View {
             }
             Spacer()
             Button(action: {
+                person.addToList(name: person.name, id: person.id, list: listViewModel.list)
                 if(!person.added){
                     person.icon = "checkmark.circle.fill"
-                    person.addToList(list: listViewModel.list, person: person, contentViewModel: contentViewModel)
                 }
-                print("pressed")
             }, label: {
                 Image(systemName:person.icon).resizable().frame(width: 20, height: 20).foregroundColor(.green)
             })
@@ -64,8 +63,10 @@ struct EmptySearch: View {
             Image(systemName: "person.badge.plus")
                 .font(.system(size: 90))
                 .padding(.bottom)
+                .foregroundColor(.green)
             Text("Search for a person...")
                 .font(.title)
+                .foregroundColor(.green)
             Spacer()
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 class SearchDataModel {
     private var datatask: URLSessionDataTask?
     
-    func loadUsers(searchTerm: String, completion: @escaping([User]) -> Void) {
+    func loadUsers(searchTerm: String, completion: @escaping([Student]) -> Void) {
         datatask?.cancel()
         guard let url = buildURL(forterm: searchTerm) else {
             completion([])
@@ -43,10 +43,10 @@ class SearchDataModel {
 
 struct SearchPeopleResponse: Decodable {
     let truncated: Bool
-    let users: [User]
+    let users: [Student]
 }
 
-struct User: Decodable {
+struct Student: Decodable {
     let uid : String
     let mail: Optional<String>
     let eduPersonPrimaryAffiliation: String

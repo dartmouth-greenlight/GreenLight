@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Vision
+import SwiftUI
 
 class CameraViewController: UIViewController {
     // MARK: - UI objects
@@ -52,7 +53,24 @@ class CameraViewController: UIViewController {
     // Vision -> AVF coordinate transform.
     var visionToAVFTransform = CGAffineTransform.identity
     
+    // User's lists
+    var greenList = [String:String]()
+    var redList = [String:String]()
+    var user: User!
+    let listService = ListService()
+    let userService = UserService()
+    
+    
     // MARK: - View controller methods
+    
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,6 +185,8 @@ class CameraViewController: UIViewController {
                 self.calculateRegionOfInterest()
             }
         }
+        // set user's lists
+        self.fetchUserLists()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -377,16 +397,16 @@ class CameraViewController: UIViewController {
             self.captureSession.stopRunning()
             DispatchQueue.main.async {
                 // Green case:
-                if(socialDict[string] != nil){
+                if(self.greenList.keys.contains(string.lowercased())) {
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0.8))
-                    self.idView.text = socialDict[string]
+                    self.idView.backgroundColor = UIColor.green.withAlphaComponent((0))
+                    self.idView.text = self.greenList[string]
                 }
                 // Red case:
-                else if(blackDict[string] != nil){
+                else if(self.redList.keys.contains(string.lowercased())) {
                     self.cutoutView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
-                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0.8))
-                    self.idView.text = blackDict[string]
+                    self.idView.backgroundColor = UIColor.red.withAlphaComponent((0))
+                    self.idView.text = self.redList[string]
                 }
                 // Yellow case:
                 else{
@@ -478,6 +498,21 @@ class CameraViewController: UIViewController {
                 self.admitButton.isHidden = true
                 self.denyButton.isHidden = true
                 self.cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+            }
+        }
+    }
+    
+    // fetch and store the user's current green and red lists
+    func fetchUserLists() {
+        print(self.user.settings)
+        if self.user.settings["greenListId"]! != "None" {
+            self.listService.fetchList(forListId: self.user.settings["greenListId"]!) { list in
+                self.greenList = list.names
+            }
+        }
+        if self.user.settings["redListId"]! != "None" {
+            self.listService.fetchList(forListId: self.user.settings["redListId"]!) { list in
+                self.redList = list.names
             }
         }
     }

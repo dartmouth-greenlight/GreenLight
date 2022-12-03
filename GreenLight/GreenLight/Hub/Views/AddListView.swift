@@ -25,24 +25,23 @@ struct AddListView: View {
                         .padding()
                     // Text field
                     TextField("List Name", text: $viewModel.name)
-                        .onSubmit {
-                            if viewModel.name != "" {
-                                viewModel.createList(contentViewModel: contentViewModel)
-                                dismiss()
-                        }
-                    }
                     // Button
                     Button("Create List") {
                         //TODO: make sure there are no lists with the same name
                         if viewModel.name != "" {
-                            viewModel.createList(contentViewModel: contentViewModel)
-                            dismiss()
+                            viewModel.createList(withTitle: viewModel.name)
                         }
+                        contentViewModel.refreshView()
                    }
                     .foregroundColor(Color.green)
 
                 }
             })
+        }
+        .onReceive(viewModel.$didCreateList) { success in
+            if success {
+                dismiss()
+            }
         }
     }
 }
@@ -67,14 +66,18 @@ struct AddListViewDepreciated: View {
                     Button("Create List") {
                         //TODO: make sure there are no lists with the same name
                         if viewModel.name != "" {
-                            viewModel.createList(contentViewModel: contentViewModel)
-                            presentationMode.wrappedValue.dismiss()
+                            viewModel.createList(withTitle: viewModel.name)
                         }
                    }
                     .foregroundColor(Color.green)
 
                 }
             })
+        }
+        .onReceive(viewModel.$didCreateList) { success in
+            if success {
+                presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }
