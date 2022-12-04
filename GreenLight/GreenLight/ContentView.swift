@@ -7,10 +7,11 @@
 
 import SwiftUI
 import AVFoundation
+import Firebase
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: ContentViewModel
-    let manCheckVM = ManualCheckViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
@@ -35,17 +36,41 @@ struct ContentView: View {
         }
     }
     var body: some View {
-        TabView{
+        Group {
+            if authViewModel.userSession == nil {
+                LogInView()
+            } else {
+                if authViewModel.currentUser != nil {
+                    mainInterfaceView
+                }
+
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(ContentViewModel())
+    }
+}
+
+extension ContentView {
+    
+    var mainInterfaceView: some View {
+        TabView(selection: $viewModel.selctedTab) {
             //got rid of text under buttons -- there are only 3 tabs and they are always there, users will remember what they connect to
-            HubView()
+            HubView(user: authViewModel.currentUser!)
                 .tabItem() {
                     Image(systemName: "list.bullet").renderingMode(.template)
                     //Text("Lists")
                 }
-            ScannerView()
+                .tag("Hub")
+            ScannerView(user: authViewModel.currentUser!)
                 .tabItem() {
                     Image(systemName: "camera.viewfinder").renderingMode(.template)
-                    //Text("Scanner")
+                    //Text("Scanner"
                 }.onDisappear(){
                     if(Property.sharedInstance.flashOn){
                         Property.sharedInstance.flashOn = false
@@ -57,19 +82,19 @@ struct ContentView: View {
                         toggleFlash()
                     }
                 }
-            ManualCheckView(viewModel: manCheckVM)
+                .tag("Scanner")
+            ManualCheckView(user: authViewModel.currentUser!)
                 .tabItem() {
                     Image(systemName: "person.crop.circle.badge.checkmark").renderingMode(.template)
                     //Text("Manual Check")
                 }
+                .tag("Manual Check")
+            SettingsView(user: authViewModel.currentUser!)
+                .tabItem() {
+                    Image(systemName: "gearshape")
+                }
+                .tag("Settings")
         }.accentColor(.green)
         //switch this to .tint(.green) when ios 15 becomes the norm
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(ContentViewModel())
     }
 }

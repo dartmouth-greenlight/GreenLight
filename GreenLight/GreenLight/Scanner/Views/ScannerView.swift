@@ -9,6 +9,11 @@ import AVFoundation
 
 
 struct ScannerView: View {
+    @ObservedObject var viewModel: ScannerViewModel
+    
+    init(user: User) {
+        self.viewModel = ScannerViewModel(user: user)
+    }
     var body: some View {
         VStack{
             ZStack{
@@ -16,7 +21,7 @@ struct ScannerView: View {
                     .font(.custom("Futura-Bold", size: 30))
                     .foregroundColor(.green)
             }.frame(height: 45)
-            CameraView()
+            CameraView(user: self.viewModel.user)
                 .ignoresSafeArea()
         }
     }
@@ -24,6 +29,6 @@ struct ScannerView: View {
 
 struct ScannerView_Previews: PreviewProvider {
     static var previews: some View {
-        ScannerView()
+        ScannerView(user: User(username: "", fullname: "", email: "", uid: "", settings: ["":""]))
     }
 }

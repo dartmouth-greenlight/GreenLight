@@ -19,17 +19,17 @@ class AddSearchViewModel: ObservableObject {
     private func loadUsers(searchTerm: String) {
         people.removeAll()
         dataModel.loadUsers(searchTerm: searchTerm) { people in
-            people.forEach { self.appendUser(user: $0) }
+            people.forEach { self.appendUser(student: $0) }
         }
     }
     
-    private func appendUser(user: User) {
+    private func appendUser(student: Student) {
         DispatchQueue.main.async {
-            if(user.uid.prefix(3)=="f00") {
-                if(user.mail !=  nil){
+            if(student.uid.prefix(3)=="f00") {
+                if(student.mail !=  nil){
                     
                     // Get class year from email
-                    let yearPieces = user.mail!.split(separator: "@")
+                    let yearPieces = student.mail!.split(separator: "@")
                     let twoDigYear = yearPieces[0].split(separator: ".")
                     var currYear = ""
                     currYear += twoDigYear.last!
@@ -37,7 +37,7 @@ class AddSearchViewModel: ObservableObject {
                     //toggle this to include / exclude grad students/older alums
                     if(currYear.prefix(1) == "2"){
                         if(currYear.prefix(2) == "22" || currYear.prefix(2) == "23" || currYear.prefix(2) == "24" || currYear.prefix(2) == "25" || currYear.prefix(2) == "26") {
-                            let curr = SearchPersonViewModel(name: user.displayName, id: user.uid, year: currYear)
+                            let curr = SearchPersonViewModel(name: student.displayName, id: student.uid, year: currYear)
                             self.people.append(curr)
                         }
                     }
@@ -59,6 +59,8 @@ class SearchPersonViewModel: Identifiable, ObservableObject {
     @Published var added: Bool
     @Published var icon: String
     
+    let service = ListService()
+    
     init(name: String, id: String, year: String) {
         self.id = id
         self.name = name
@@ -68,7 +70,11 @@ class SearchPersonViewModel: Identifiable, ObservableObject {
     }
     
     
-    func addToList(list: GreenLightList, person: SearchPersonViewModel, contentViewModel: ContentViewModel) {
-        contentViewModel.addToList(list: list, person: Person(name: person.name, id: person.id, year: person.year))
+    func addToList(name: String, id: String, list: ListGL) {
+        service.addToList(name: name, id: id, list: list) { success in
+            if success {
+                self.added = true
+            }
+        }
     }
 }

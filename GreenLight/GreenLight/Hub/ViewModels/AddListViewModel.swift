@@ -11,10 +11,17 @@ import SwiftUI
 class AddListViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var showView = false
+    @Published var didCreateList = false
     
-    func createList(contentViewModel: ContentViewModel) {
+    let service = ListService()
+    
+    func createList(withTitle title: String) {
         if self.name != "" {
-            contentViewModel.lists.append(GreenLightList(name: self.name, list: []))
+            service.uploadList(title: title) { success in
+                if success {
+                    self.didCreateList = true
+                }
+            }
         }
     }
 }
