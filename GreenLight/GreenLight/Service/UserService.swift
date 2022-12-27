@@ -20,8 +20,8 @@ struct UserService {
             }
     }
     
-    func updateSettings(forUid uid: String, greenListId: String, redListId: String, completion: @escaping(Bool) -> Void) {
-        let data = ["settings": ["greenListId": greenListId, "redListId": redListId]] as [String : Any]
+    func updateSettings(forUid uid: String, greenListId: String, redListId: String, eventId: String, completion: @escaping(Bool) -> Void) {
+        let data = ["settings": ["eventId": eventId, "greenListId": greenListId, "redListId": redListId]] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid)
             .updateData(data){ error in

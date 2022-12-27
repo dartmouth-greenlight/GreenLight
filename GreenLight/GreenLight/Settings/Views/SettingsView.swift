@@ -21,6 +21,12 @@ struct SettingsView: View {
             VStack {
                 Form(content: {
                     Section(header: Text("Scanner")) {
+                        Picker("Event", selection: $viewModel.eventId) {
+                            Text("None").tag("None")
+                            ForEach(viewModel.events) { event in
+                                Text(event.title).tag(event.id!)
+                            }
+                        }
                         Picker("Green List", selection: $viewModel.greenListId) {
                             Text("None").tag("None")
                             ForEach(viewModel.lists) { list in

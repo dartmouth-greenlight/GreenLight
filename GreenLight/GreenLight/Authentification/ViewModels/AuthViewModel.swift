@@ -46,7 +46,7 @@ class AuthViewModel: ObservableObject {
             
             print("Successfully registered user")
             
-            let data = ["email": email, "username": username.lowercased(), "fullname": fullname, "uid": user.uid, "settings": ["greenListId": "None", "redListId": "None"]]
+            let data = ["email": email, "username": username.lowercased(), "fullname": fullname, "uid": user.uid, "settings": ["eventId": "None", "greenListId": "None", "redListId": "None"]]
             
             Firestore.firestore().collection("users")
                 .document(user.uid)

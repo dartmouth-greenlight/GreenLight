@@ -70,6 +70,7 @@ func getName(id: String) -> String {
     return student
 }
 
+
 //TODO: Separate fetching data from the processing data
 func getID(name: String, searchNum: Int? = 1) -> [Person]{
     let original = name

@@ -64,13 +64,16 @@ extension ContentView {
             HubView(user: authViewModel.currentUser!)
                 .tabItem() {
                     Image(systemName: "list.bullet").renderingMode(.template)
-                    //Text("Lists")
                 }
                 .tag("Hub")
+            EventsView(user: authViewModel.currentUser!)
+                .tabItem() {
+                    Image(systemName: "party.popper").renderingMode(.template)
+                }
+                .tag("Events")
             ScannerView(user: authViewModel.currentUser!)
                 .tabItem() {
                     Image(systemName: "camera.viewfinder").renderingMode(.template)
-                    //Text("Scanner"
                 }.onDisappear(){
                     if(Property.sharedInstance.flashOn){
                         Property.sharedInstance.flashOn = false

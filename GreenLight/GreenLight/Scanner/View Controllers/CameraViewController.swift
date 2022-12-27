@@ -11,6 +11,12 @@ import AVFoundation
 import Vision
 import SwiftUI
 
+extension String {
+    subscript(i: Int) -> String {
+        return String(self[index(startIndex, offsetBy: i)])
+    }
+}
+
 class CameraViewController: UIViewController {
     // MARK: - UI objects
     var previewView: PreviewView!
@@ -59,6 +65,7 @@ class CameraViewController: UIViewController {
     var user: User!
     let listService = ListService()
     let userService = UserService()
+    let eventService = EventService()
     
     
     // MARK: - View controller methods
@@ -401,6 +408,7 @@ class CameraViewController: UIViewController {
                     self.cutoutView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
                     self.idView.backgroundColor = UIColor.green.withAlphaComponent((0))
                     self.idView.text = self.greenList[string]
+                    self.addEventAttendee(studentId: string, studentName: self.greenList[string.lowercased()]!)
                 }
                 // Red case:
                 else if(self.redList.keys.contains(string.lowercased())) {
@@ -504,7 +512,6 @@ class CameraViewController: UIViewController {
     
     // fetch and store the user's current green and red lists
     func fetchUserLists() {
-        print(self.user.settings)
         if self.user.settings["greenListId"]! != "None" {
             self.listService.fetchList(forListId: self.user.settings["greenListId"]!) { list in
                 self.greenList = list.names
@@ -513,6 +520,19 @@ class CameraViewController: UIViewController {
         if self.user.settings["redListId"]! != "None" {
             self.listService.fetchList(forListId: self.user.settings["redListId"]!) { list in
                 self.redList = list.names
+            }
+        }
+    }
+    
+    // add an attendee to the user's current event
+    func addEventAttendee(studentId: String, studentName: String) {
+        if self.user.settings["eventId"]! != "None" {
+            print(Array(arrayLiteral: studentId))
+            let year = "202" + studentId[3]
+            self.eventService.addAttendee(name: studentName, studentId: studentId, year: year, eventId: self.user.settings["eventId"]!) { success in
+                if success {
+                    print("Attendee added successfully")
+                }
             }
         }
     }
