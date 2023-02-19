@@ -89,8 +89,8 @@ It includes:
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Complete Firebase backend implementation
 - [ ] Improve UI and design
+- [ ] Add events feature to keep track of event statistics
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
